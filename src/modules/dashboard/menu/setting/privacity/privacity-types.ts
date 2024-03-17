@@ -4,5 +4,5 @@ export enum PrivacityCurrentViewEnum {
   INFORMATION = 'information',
   PROFILE = 'profile',
   LOCKED = 'locked',
-  ONLINE = 'online'
+  ONLINE = 'online',
 }

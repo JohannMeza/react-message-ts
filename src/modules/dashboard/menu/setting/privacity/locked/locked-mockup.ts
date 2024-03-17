@@ -3,27 +3,27 @@ import { ContactsType } from './locked-types';
 export const contactsBloquedMockup = [
   {
     name: 'Compras supermercados',
-    avatar: ''
+    avatar: '',
   },
   {
     name: 'Banco Pichcincha',
-    avatar: ''
+    avatar: '',
   },
   {
     name: 'Compras supermercados',
-    avatar: ''
+    avatar: '',
   },
   {
     name: 'Compras supermercados',
-    avatar: ''
+    avatar: '',
   },
   {
     name: 'Compras supermercados',
-    avatar: ''
+    avatar: '',
   },
   {
     name: 'Compras supermercados',
-    avatar: ''
+    avatar: '',
   },
 ];
 

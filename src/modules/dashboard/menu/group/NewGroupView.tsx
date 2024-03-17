@@ -15,7 +15,10 @@ export const NewGroupView: FC<PropsWithChildren> = () => {
 
   return (
     <>
-      <ContainedView moveposition={position} children={GroupViewCurrent[currentView]} />
+      <ContainedView
+        moveposition={position}
+        children={GroupViewCurrent[currentView]}
+      />
     </>
   );
 };

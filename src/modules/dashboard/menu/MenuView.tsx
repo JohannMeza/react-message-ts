@@ -9,19 +9,25 @@ import { ChatView } from './chat/ChatView';
 
 export const MenuView: FC<PropsWithChildren> = () => {
   const { currentView, position, handleChangeMenu } = useHandleChangeMenuView();
-  const handleActionProfile = (): void => handleChangeMenu(MenuCurrentViewEnum.PROFILE, false);
+  const handleActionProfile = (): void =>
+    handleChangeMenu(MenuCurrentViewEnum.PROFILE, false);
 
   const MenuViewCurrent = {
     [MenuCurrentViewEnum.NEW_GROUP]: <NewGroupView />,
-    [MenuCurrentViewEnum.PROFILE]: <ProfileView handleClickBack={handleActionProfile} />,
+    [MenuCurrentViewEnum.PROFILE]: (
+      <ProfileView handleClickBack={handleActionProfile} />
+    ),
     [MenuCurrentViewEnum.SETTING]: <SettingView />,
     [MenuCurrentViewEnum.CHAT]: null,
   };
-  
+
   return (
     <>
       <ChatView />
-      <ContainedView moveposition={position} children={MenuViewCurrent[currentView]} />
+      <ContainedView
+        moveposition={position}
+        children={MenuViewCurrent[currentView]}
+      />
     </>
   );
 };

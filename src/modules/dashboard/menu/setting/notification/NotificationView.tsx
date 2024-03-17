@@ -11,27 +11,41 @@ export const NotificationView: FC<PropsWithChildren> = () => {
   return (
     <>
       <Stack flexDirection="row" alignItems="center" gap={2} padding="10px">
-        <IconButton 
-          onClick={() => handleChangeSetting(SettingCurrentViewEnum.MAIN, false)}
-          color='default'
+        <IconButton
+          onClick={() =>
+            handleChangeSetting(SettingCurrentViewEnum.MAIN, false)
+          }
+          color="default"
         >
           <NavigateBeforeIcon />
-        </IconButton> 
-        <Typography fontSize={20} fontWeight={700} color="grey.700">Notificaciones</Typography>
+        </IconButton>
+        <Typography fontSize={20} fontWeight={700} color="grey.700">
+          Notificaciones
+        </Typography>
       </Stack>
       <Stack>
-        <Typography padding="10px" fontSize={16} fontWeight={600}>Mensajes</Typography>
+        <Typography padding="10px" fontSize={16} fontWeight={600}>
+          Mensajes
+        </Typography>
         <ListSettingBox>
           <Box>
-            <Typography fontSize={16} fontWeight={500} color="grey.700">Notificaciones de mensajes</Typography>
-            <Typography fontSize={14} color="grey.700">Se muestran notificaciones de mensajes nuevos</Typography>
+            <Typography fontSize={16} fontWeight={500} color="grey.700">
+              Notificaciones de mensajes
+            </Typography>
+            <Typography fontSize={14} color="grey.700">
+              Se muestran notificaciones de mensajes nuevos
+            </Typography>
           </Box>
           <Checkbox />
         </ListSettingBox>
         <ListSettingBox>
           <Box>
-            <Typography fontSize={16} fontWeight={500} color="grey.700">Sonidos</Typography>
-            <Typography fontSize={14} color="grey.700">Se reproduce un sonido cuando hay mensajes entrantes</Typography>
+            <Typography fontSize={16} fontWeight={500} color="grey.700">
+              Sonidos
+            </Typography>
+            <Typography fontSize={14} color="grey.700">
+              Se reproduce un sonido cuando hay mensajes entrantes
+            </Typography>
           </Box>
           <Checkbox />
         </ListSettingBox>

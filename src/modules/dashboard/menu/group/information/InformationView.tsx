@@ -1,5 +1,13 @@
 import { FC, PropsWithChildren } from 'react';
-import { Avatar, Box, Button, Grid, IconButton, Stack, Typography } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  Stack,
+  Typography,
+} from '@mui/material';
 import { useHandleChangeGroupView } from '../group-hooks';
 import { GroupCurrentViewEnum } from '../group-types';
 import { Controls } from '@src/shared/component/Controls';
@@ -16,15 +24,23 @@ export const InformationView: FC<PropsWithChildren> = () => {
   };
 
   return (
-    <Box display="grid" height={1} gridTemplateRows="auto auto 1fr" gap={2} padding="10px">
+    <Box
+      display="grid"
+      height={1}
+      gridTemplateRows="auto auto 1fr"
+      gap={2}
+      padding="10px"
+    >
       <Stack flexDirection="row" alignItems="center" gap={2}>
-        <IconButton 
+        <IconButton
           onClick={() => handleChangeGroup(GroupCurrentViewEnum.MEMBER, false)}
-          color='default'
+          color="default"
         >
           <NavigateBeforeIcon />
-        </IconButton> 
-        <Typography fontSize={18} fontWeight={700} color="grey.700">Nuevo Grupo</Typography>
+        </IconButton>
+        <Typography fontSize={18} fontWeight={700} color="grey.700">
+          Nuevo Grupo
+        </Typography>
       </Stack>
 
       <Box marginTop={3}>
@@ -33,13 +49,23 @@ export const InformationView: FC<PropsWithChildren> = () => {
         </Stack>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Controls.InputComponent variant='primary' label='Tu Nombre' fullWidth />
+            <Controls.InputComponent
+              variant="primary"
+              label="Tu Nombre"
+              fullWidth
+            />
           </Grid>
           <Grid item xs={12}>
-            <Controls.InputComponent variant='primary' label='Info' fullWidth />
+            <Controls.InputComponent variant="primary" label="Info" fullWidth />
           </Grid>
           <Grid item xs={12} display="flex" justifyContent="center">
-            <Button variant='contained' color='info' onClick={handleSubmitGroup}>Crear grupo</Button>
+            <Button
+              variant="contained"
+              color="info"
+              onClick={handleSubmitGroup}
+            >
+              Crear grupo
+            </Button>
           </Grid>
         </Grid>
       </Box>

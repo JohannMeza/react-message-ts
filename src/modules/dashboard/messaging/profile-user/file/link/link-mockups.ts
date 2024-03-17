@@ -1,47 +1,76 @@
 import { MessageStateEnum } from '@src/modules/dashboard/dashboard-types';
 import { LinksMockupType } from './link-types';
+import { MessagesTypesEnum } from '../../../messaging-types';
 
-export const MessagesLinksMockup: LinksMockupType[] = [
+export const messagesLinksMockup: LinksMockupType[] = [
   {
     month: 'ESTE MES',
     messages: [
       {
-        id: '1234564asdasd',
+        id: '1234564asdasad',
         message: 'http://127.0.0.1:5173/messaging',
         sendId: 'string',
-        userId: 'string',
         createdAt: 15644,
+        receivedId: '15',
+        typeMessage: MessagesTypesEnum.LINK,
         state: MessageStateEnum.READED,
+        isEdit: true,
+        isNewDay: false,
+        url: '',
+        fileName: '',
+        name: '',
+        typeFile: 'doc',
       },
       {
-        id: '1234asdgv564',
+        id: '1234asdgv5q64',
         message: 'http://127.0.0.1:5173/messaging',
         sendId: 'string',
-        userId: 'string',
         createdAt: 15644,
+        receivedId: '15',
+        typeMessage: MessagesTypesEnum.LINK,
         state: MessageStateEnum.READED,
+        isEdit: true,
+        isNewDay: false,
+        url: '',
+        fileName: '',
+        name: '',
+        typeFile: 'doc',
       },
-    ]
+    ],
   },
   {
     month: 'AGOSTO',
     messages: [
       {
-        id: '1234qwdqw564',
+        id: '1234qwdqww564',
         message: 'http://127.0.0.1:5173/messaging',
         sendId: 'string',
-        userId: 'string',
         createdAt: 15644,
+        receivedId: '15',
+        typeMessage: MessagesTypesEnum.LINK,
         state: MessageStateEnum.READED,
+        isEdit: true,
+        isNewDay: false,
+        url: '',
+        fileName: '',
+        name: '',
+        typeFile: 'doc',
       },
       {
-        id: '1234qwdqw564',
+        id: '1234qwddqw564',
         message: 'http://127.0.0.1:5173/messaging',
         sendId: 'string',
-        userId: 'string',
         createdAt: 15644,
+        receivedId: '15',
+        typeMessage: MessagesTypesEnum.LINK,
         state: MessageStateEnum.READED,
+        isEdit: true,
+        isNewDay: false,
+        url: '',
+        fileName: '',
+        name: '',
+        typeFile: 'doc',
       },
-    ]
+    ],
   },
 ];

@@ -20,10 +20,13 @@ export const PrivacityView: FC<PropsWithChildren> = () => {
     [PrivacityCurrentViewEnum.ONLINE]: <OnlineView />,
     [PrivacityCurrentViewEnum.PROFILE]: <ProfileView />,
   };
-  
+
   return (
     <>
-      <ContainedView moveposition={position} children={PrivacityViewCurrent[currentView]} />
+      <ContainedView
+        moveposition={position}
+        children={PrivacityViewCurrent[currentView]}
+      />
     </>
   );
 };

@@ -1,4 +1,14 @@
-import { Avatar, IconButton, Menu, MenuItem, Stack, Tab, Tabs, Typography, Box } from '@mui/material';
+import {
+  Avatar,
+  IconButton,
+  Menu,
+  MenuItem,
+  Stack,
+  Tab,
+  Tabs,
+  Typography,
+  Box,
+} from '@mui/material';
 import { FC, PropsWithChildren, useState } from 'react';
 import { MenuTabsEnum } from './chat-types';
 import { ContactView } from './contact/ContactView';
@@ -15,9 +25,13 @@ export const ChatView: FC<PropsWithChildren> = () => {
   const { tab, handleTabsMenu } = useHandleTabsMenu();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => setAnchorEl(event.currentTarget);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void =>
+    setAnchorEl(event.currentTarget);
   const handleClose = (): void => setAnchorEl(null);
-  const handleChange = (_event: React.SyntheticEvent, newValue: MenuTabsEnum): void => handleTabsMenu(newValue);
+  const handleChange = (
+    _event: React.SyntheticEvent,
+    newValue: MenuTabsEnum,
+  ): void => handleTabsMenu(newValue);
 
   const handleOpenMenu = (menuView: MenuCurrentViewEnum): void => {
     handleClose();
@@ -37,20 +51,35 @@ export const ChatView: FC<PropsWithChildren> = () => {
   };
 
   return (
-    <Box display="grid" gridTemplateRows="auto auto 1fr" maxHeight={1} position="relative" overflow="hidden">
-      <Stack flexDirection="row" alignItems="center" justifyContent="space-between" paddingX={2} paddingTop={3} paddingBottom={1}>
+    <Box
+      display="grid"
+      gridTemplateRows="auto auto 1fr"
+      maxHeight={1}
+      position="relative"
+      overflow="hidden"
+    >
+      <Stack
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-between"
+        paddingX={2}
+        paddingTop={3}
+        paddingBottom={1}
+      >
         <Stack flexDirection="row" alignItems="center" gap={2}>
           <Avatar />
-          <Typography fontSize={20} fontWeight={800} color="grey.700">Johann Meza</Typography>
+          <Typography fontSize={20} fontWeight={800} color="grey.700">
+            Johann Meza
+          </Typography>
         </Stack>
 
-        <IconButton 
+        <IconButton
           id="basic-button"
           aria-controls={open ? 'basic-menu' : undefined}
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
-          color='default'
+          color="default"
         >
           <MoreVertIcon />
         </IconButton>
@@ -61,10 +90,20 @@ export const ChatView: FC<PropsWithChildren> = () => {
           onClose={handleClose}
           MenuListProps={{ 'aria-labelledby': 'basic-button' }}
         >
-          <MenuItem onClick={() => handleOpenMenu(MenuCurrentViewEnum.PROFILE)}>Mi Perfil</MenuItem>
-          <MenuItem onClick={() => handleNewContact(MenuTabsEnum.SEARCH)}>Agregar Contacto</MenuItem>
-          <MenuItem onClick={() => handleOpenMenu(MenuCurrentViewEnum.NEW_GROUP)}>Nuevo Grupo</MenuItem>
-          <MenuItem onClick={() => handleOpenMenu(MenuCurrentViewEnum.SETTING)}>Configuración</MenuItem>
+          <MenuItem onClick={() => handleOpenMenu(MenuCurrentViewEnum.PROFILE)}>
+            Mi Perfil
+          </MenuItem>
+          <MenuItem onClick={() => handleNewContact(MenuTabsEnum.SEARCH)}>
+            Agregar Contacto
+          </MenuItem>
+          <MenuItem
+            onClick={() => handleOpenMenu(MenuCurrentViewEnum.NEW_GROUP)}
+          >
+            Nuevo Grupo
+          </MenuItem>
+          <MenuItem onClick={() => handleOpenMenu(MenuCurrentViewEnum.SETTING)}>
+            Configuración
+          </MenuItem>
           <MenuItem onClick={handleClose}>Cerrar Sesión</MenuItem>
         </Menu>
       </Stack>
@@ -80,7 +119,7 @@ export const ChatView: FC<PropsWithChildren> = () => {
         <Tab label="Solicitudes" value={MenuTabsEnum.REQUEST} />
         <Tab label="Buscar" value={MenuTabsEnum.SEARCH} />
       </Tabs>
-      { MenuTabs[tab] }
+      {MenuTabs[tab]}
     </Box>
   );
 };

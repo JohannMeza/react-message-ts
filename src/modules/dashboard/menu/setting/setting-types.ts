@@ -3,5 +3,5 @@ export enum SettingCurrentViewEnum {
   PROFILE = 'profile',
   NOTIFICATION = 'notification',
   SECURITY = 'security',
-  PRIVACITY = 'privacity'
+  PRIVACITY = 'privacity',
 }

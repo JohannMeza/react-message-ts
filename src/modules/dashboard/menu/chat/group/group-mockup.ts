@@ -8,7 +8,7 @@ export const groupsMockup: GroupItemType[] = [
     state: MessageStateEnum.READED,
     avatar: null,
     createdAt: 1633596000000,
-    id: '1696698883341'
+    id: '1696698883341',
   },
   {
     name: 'Familia',
@@ -16,7 +16,7 @@ export const groupsMockup: GroupItemType[] = [
     state: MessageStateEnum.UNREAD,
     avatar: null,
     createdAt: 1696688883349,
-    id: '1696698883341'
+    id: '1696698883341',
   },
   {
     name: 'Universidad',
@@ -24,7 +24,7 @@ export const groupsMockup: GroupItemType[] = [
     state: MessageStateEnum.READED,
     avatar: null,
     createdAt: 1696688883349,
-    id: '1696698883341'
+    id: '1696698883341',
   },
   {
     name: 'Bootcam Web',
@@ -32,7 +32,7 @@ export const groupsMockup: GroupItemType[] = [
     state: MessageStateEnum.READED,
     avatar: null,
     createdAt: 1696698883341,
-    id: '1696698883341'
+    id: '1696698883341',
   },
   {
     name: 'Universidad',
@@ -40,7 +40,7 @@ export const groupsMockup: GroupItemType[] = [
     state: MessageStateEnum.READED,
     avatar: null,
     createdAt: 1696698883341,
-    id: '123'
+    id: '123',
   },
   {
     name: 'Bootcam Web',
@@ -48,7 +48,7 @@ export const groupsMockup: GroupItemType[] = [
     state: MessageStateEnum.READED,
     avatar: null,
     createdAt: 1696698883341,
-    id: '123'
+    id: '123',
   },
   {
     name: 'Universidad',
@@ -56,7 +56,7 @@ export const groupsMockup: GroupItemType[] = [
     state: MessageStateEnum.READED,
     avatar: null,
     createdAt: 1696698883341,
-    id: '123'
+    id: '123',
   },
   {
     name: 'Bootcam Web',
@@ -64,6 +64,6 @@ export const groupsMockup: GroupItemType[] = [
     state: MessageStateEnum.READED,
     avatar: null,
     createdAt: 1696698883341,
-    id: '123'
+    id: '123',
   },
 ];

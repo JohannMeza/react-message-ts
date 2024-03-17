@@ -3,5 +3,5 @@ import { ModalComponent } from './modal/ModalComponent';
 
 export const Controls = {
   InputComponent,
-  ModalComponent
+  ModalComponent,
 };

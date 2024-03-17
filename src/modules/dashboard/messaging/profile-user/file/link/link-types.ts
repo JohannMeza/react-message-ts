@@ -1,6 +1,6 @@
-import { MessageLinkBoxType } from '../../../component/message/message-types';
+import { MessagesType } from '../../../messaging-types';
 
 export interface LinksMockupType {
-  month: string
-  messages: MessageLinkBoxType[]
+  month: string;
+  messages: MessagesType[];
 }

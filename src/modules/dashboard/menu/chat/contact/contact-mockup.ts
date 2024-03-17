@@ -8,7 +8,7 @@ export const contactsMockup: ChatItemType[] = [
     state: MessageStateEnum.READED,
     avatar: null,
     createdAt: 1696214397605,
-    id: '1'
+    id: '1',
   },
   {
     name: 'Esther Howard',
@@ -16,7 +16,7 @@ export const contactsMockup: ChatItemType[] = [
     state: MessageStateEnum.READED,
     avatar: null,
     createdAt: 1668307200000,
-    id: '2'
+    id: '2',
   },
   {
     name: 'Esther Howard',
@@ -24,7 +24,7 @@ export const contactsMockup: ChatItemType[] = [
     state: MessageStateEnum.READED,
     avatar: null,
     createdAt: 1673414400000,
-    id: '3'
+    id: '3',
   },
   {
     name: 'Esther Howard',
@@ -32,7 +32,7 @@ export const contactsMockup: ChatItemType[] = [
     state: MessageStateEnum.READED,
     avatar: null,
     createdAt: 1696698883341,
-    id: '4'
+    id: '4',
   },
   {
     name: 'David Cerron',
@@ -40,7 +40,7 @@ export const contactsMockup: ChatItemType[] = [
     state: MessageStateEnum.UNREAD,
     avatar: null,
     createdAt: 1696698883341,
-    id: '5'
+    id: '5',
   },
   {
     name: 'Nicole Perez',
@@ -48,7 +48,7 @@ export const contactsMockup: ChatItemType[] = [
     state: MessageStateEnum.READED,
     avatar: null,
     createdAt: 1696698883341,
-    id: '6'
+    id: '6',
   },
   {
     name: 'Hellen Fernadez',
@@ -56,8 +56,6 @@ export const contactsMockup: ChatItemType[] = [
     state: MessageStateEnum.READED,
     avatar: null,
     createdAt: 1696698883341,
-    id: '7'
+    id: '7',
   },
 ];
-
-

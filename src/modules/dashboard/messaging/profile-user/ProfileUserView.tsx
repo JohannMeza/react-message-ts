@@ -7,7 +7,9 @@ import { DirectMessageView } from './direct-message/DirectMessageView';
 import { FileView } from './file/FileView';
 import { ContainedView } from '../../component/ContainedBoxView';
 
-export const ProfileUserView: FC<{ width: { xs: string, md: string } | string }> = ({ width }) => {
+export const ProfileUserView: FC<{
+  width: { xs: string; md: string } | string;
+}> = ({ width }) => {
   const { currentView, position } = useHandleChangeProfileUserView();
 
   const ProfileViewCurrentView = {
@@ -23,14 +25,16 @@ export const ProfileUserView: FC<{ width: { xs: string, md: string } | string }>
       overflow="hidden"
       position={{ xs: 'absolute', md: 'relative' }}
       zIndex={10000}
-      sx={{ 
-        textWrap: 'nowrap', 
-        transition: 'width ease .2s', 
-        width
+      sx={{
+        textWrap: 'nowrap',
+        transition: 'width ease .2s',
+        width,
       }}
     >
-      
-      <ContainedView moveposition={position} children={ProfileViewCurrentView[currentView]} />
+      <ContainedView
+        moveposition={position}
+        children={ProfileViewCurrentView[currentView]}
+      />
     </Box>
   );
 };

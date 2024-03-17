@@ -5,7 +5,7 @@ export const contactsMockup = [
     state: 'READED',
     avatar: null,
     createdAt: 1696214397605,
-    id: '1'
+    id: '1',
   },
   {
     name: 'Esther Howard',
@@ -13,7 +13,7 @@ export const contactsMockup = [
     state: 'READED',
     avatar: null,
     createdAt: 1668307200000,
-    id: '2'
+    id: '2',
   },
   {
     name: 'Esther Howard',
@@ -21,7 +21,7 @@ export const contactsMockup = [
     state: 'READED',
     avatar: null,
     createdAt: 1668307200000,
-    id: '2'
+    id: '2',
   },
   {
     name: 'Esther Howard',
@@ -29,7 +29,7 @@ export const contactsMockup = [
     state: 'READED',
     avatar: null,
     createdAt: 1668307200000,
-    id: '2'
+    id: '2',
   },
   {
     name: 'Esther Howard',
@@ -37,7 +37,7 @@ export const contactsMockup = [
     state: 'READED',
     avatar: null,
     createdAt: 1668307200000,
-    id: '2'
+    id: '2',
   },
   {
     name: 'Esther Howard',
@@ -45,7 +45,7 @@ export const contactsMockup = [
     state: 'READED',
     avatar: null,
     createdAt: 1668307200000,
-    id: '2'
+    id: '2',
   },
   {
     name: 'Esther Howard',
@@ -53,21 +53,21 @@ export const contactsMockup = [
     state: 'READED',
     avatar: null,
     createdAt: 1668307200000,
-    id: '2'
+    id: '2',
   },
 ];
 
 export const contactsSelectMockup = [
   {
     name: 'Johann Meza',
-    avatar: ''
+    avatar: '',
   },
   {
     name: 'Jordan',
-    avatar: ''
+    avatar: '',
   },
   {
     name: 'Joaquin',
-    avatar: ''
+    avatar: '',
   },
 ];

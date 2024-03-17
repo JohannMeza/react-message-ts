@@ -8,26 +8,26 @@ export enum MenuTabsEnum {
 }
 
 export enum MessagesTypesEnum {
-  NORMAL       = 'TYPE_1',
-  INFO         = 'TYPE_2',
-  LOCKED       = 'TYPE_3',
-  NOTIFICATION = 'TYPE_4'
+  NORMAL = 'TYPE_1',
+  INFO = 'TYPE_2',
+  LOCKED = 'TYPE_3',
+  NOTIFICATION = 'TYPE_4',
 }
 
 export interface MessagesType {
-  id: string
-  name: string
-  message: string
-  sendId: string
-  receivedId: string
-  createdAt: number
-  state: MessageStateEnum
-  typeMessage: MessagesTypesEnum
-  isNewDay: boolean
-  isEdit: boolean
+  id: string;
+  name: string;
+  message: string;
+  sendId: string;
+  receivedId: string;
+  createdAt: number;
+  state: MessageStateEnum;
+  typeMessage: MessagesTypesEnum;
+  isNewDay: boolean;
+  isEdit: boolean;
 }
 
 export interface MessagingType {
-  id: string | null
-  messages: MessagesType[]
-};
+  id: string | null;
+  messages: MessagesType[];
+}

@@ -5,50 +5,64 @@ export const messagesMockup: MessagesType[] = [
   {
     id: 'string',
     name: 'string',
-    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id mauris, risus id urna tellus velit amet nulla ornare. Varius cras orci euismod malesuada ullamcorper. ',
+    message:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id mauris, risus id urna tellus velit amet nulla ornare. Varius cras orci euismod malesuada ullamcorper. ',
     sendId: '1',
     receivedId: '15',
     createdAt: 1696698883341,
     state: MessageStateEnum.READED,
     typeMessage: MessagesTypesEnum.NOTIFICATION,
     isNewDay: false,
-    isEdit: false
+    isEdit: false,
+    url: '',
+    fileName: '',
+    typeFile: 'doc',
   },
   {
     id: 'string',
     name: 'string',
     message: 'Lorem ipsun dolor',
     sendId: '1',
-    receivedId: '15',
+    receivedId: '1',
     createdAt: 1696698883341,
     state: MessageStateEnum.UNREAD,
     typeMessage: MessagesTypesEnum.NORMAL,
     isNewDay: true,
-    isEdit: true
+    isEdit: true,
+    url: '',
+    fileName: '',
+    typeFile: 'doc',
   },
   {
     id: 'string',
     name: 'string',
     message: 'Lorem ipsun dolor',
     sendId: '1',
-    receivedId: '15',
+    receivedId: '1',
     createdAt: 1696698883341,
     state: MessageStateEnum.READED,
-    typeMessage: MessagesTypesEnum.NORMAL,
+    typeMessage: MessagesTypesEnum.DOCUMENT,
     isNewDay: false,
-    isEdit: false
+    isEdit: false,
+    url: '',
+    fileName: 'INSTITUTO DE EDUCACIÓN SUPERIOR TECNOLOGICA PUBLICO.docs',
+    typeFile: 'doc',
   },
   {
     id: 'string',
     name: 'string',
-    message: 'Lorem ipsun dolor, Lorem ipsun dolor. Lorem ipsun dolorLorem ipsun dolor',
+    message:
+      'Lorem ipsun dolor, Lorem ipsun dolor. Lorem ipsun dolorLorem ipsun dolor',
     sendId: '2',
     receivedId: '15',
     createdAt: 1696688883349,
     state: MessageStateEnum.READED,
     typeMessage: MessagesTypesEnum.NORMAL,
     isNewDay: true,
-    isEdit: false
+    isEdit: false,
+    url: '',
+    fileName: '',
+    typeFile: 'doc',
   },
   {
     id: 'string',
@@ -60,7 +74,10 @@ export const messagesMockup: MessagesType[] = [
     state: MessageStateEnum.READED,
     typeMessage: MessagesTypesEnum.NORMAL,
     isNewDay: false,
-    isEdit: false
+    isEdit: false,
+    url: '',
+    fileName: '',
+    typeFile: 'doc',
   },
   {
     id: 'string',
@@ -72,7 +89,10 @@ export const messagesMockup: MessagesType[] = [
     state: MessageStateEnum.READED,
     typeMessage: MessagesTypesEnum.NORMAL,
     isNewDay: false,
-    isEdit: false
+    isEdit: false,
+    url: '',
+    fileName: '',
+    typeFile: 'doc',
   },
   {
     id: 'string',
@@ -84,7 +104,10 @@ export const messagesMockup: MessagesType[] = [
     state: MessageStateEnum.READED,
     typeMessage: MessagesTypesEnum.NORMAL,
     isNewDay: false,
-    isEdit: false
+    isEdit: false,
+    url: '',
+    fileName: '',
+    typeFile: 'doc',
   },
   {
     id: 'string',
@@ -96,7 +119,10 @@ export const messagesMockup: MessagesType[] = [
     state: MessageStateEnum.READED,
     typeMessage: MessagesTypesEnum.NORMAL,
     isNewDay: false,
-    isEdit: false
+    isEdit: false,
+    url: '',
+    fileName: '',
+    typeFile: 'doc',
   },
   {
     id: 'string',
@@ -108,7 +134,10 @@ export const messagesMockup: MessagesType[] = [
     state: MessageStateEnum.READED,
     typeMessage: MessagesTypesEnum.NORMAL,
     isNewDay: false,
-    isEdit: false
+    isEdit: false,
+    url: '',
+    fileName: '',
+    typeFile: 'doc',
   },
   {
     id: 'string',
@@ -120,7 +149,10 @@ export const messagesMockup: MessagesType[] = [
     state: MessageStateEnum.READED,
     typeMessage: MessagesTypesEnum.NORMAL,
     isNewDay: true,
-    isEdit: false
+    isEdit: false,
+    url: '',
+    fileName: '',
+    typeFile: 'doc',
   },
   {
     id: 'string',
@@ -132,7 +164,10 @@ export const messagesMockup: MessagesType[] = [
     state: MessageStateEnum.READED,
     typeMessage: MessagesTypesEnum.NORMAL,
     isNewDay: false,
-    isEdit: false
+    isEdit: false,
+    url: '',
+    fileName: '',
+    typeFile: 'doc',
   },
   {
     id: 'string',
@@ -144,7 +179,10 @@ export const messagesMockup: MessagesType[] = [
     state: MessageStateEnum.READED,
     typeMessage: MessagesTypesEnum.NORMAL,
     isNewDay: false,
-    isEdit: false
+    isEdit: false,
+    url: '',
+    fileName: '',
+    typeFile: 'doc',
   },
   {
     id: 'string',
@@ -156,7 +194,10 @@ export const messagesMockup: MessagesType[] = [
     state: MessageStateEnum.READED,
     typeMessage: MessagesTypesEnum.NORMAL,
     isNewDay: false,
-    isEdit: false
+    isEdit: false,
+    url: '',
+    fileName: '',
+    typeFile: 'doc',
   },
   {
     id: 'string',
@@ -168,7 +209,10 @@ export const messagesMockup: MessagesType[] = [
     state: MessageStateEnum.READED,
     typeMessage: MessagesTypesEnum.INFO,
     isNewDay: false,
-    isEdit: false
+    isEdit: false,
+    url: '',
+    fileName: '',
+    typeFile: 'doc',
   },
   {
     id: 'string',
@@ -180,6 +224,9 @@ export const messagesMockup: MessagesType[] = [
     state: MessageStateEnum.READED,
     typeMessage: MessagesTypesEnum.LOCKED,
     isNewDay: true,
-    isEdit: false
+    isEdit: false,
+    url: '',
+    fileName: '',
+    typeFile: 'doc',
   },
 ];

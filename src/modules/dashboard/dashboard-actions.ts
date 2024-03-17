@@ -1,5 +1,8 @@
 import { createAction } from '@cobuildlab/react-simple-state';
-import { messagingOpenEvent, messagingOpenEventError } from './menu/chat/chat-events';
+import {
+  messagingOpenEvent,
+  messagingOpenEventError,
+} from './menu/chat/chat-events';
 import { MessagesTypesEnum, MessagingType } from './menu/chat/chat-types';
 import { MessageStateEnum } from './dashboard-types';
 
@@ -8,7 +11,7 @@ export const fetchMessagingUser = createAction(
   messagingOpenEventError,
   async (messagingId: string | undefined): Promise<MessagingType> => {
     if (!messagingId) return { id: null, messages: [] };
-    return { 
+    return {
       id: messagingId,
       messages: [
         {
@@ -21,9 +24,9 @@ export const fetchMessagingUser = createAction(
           createdAt: 12345,
           isEdit: true,
           isNewDay: true,
-          state: MessageStateEnum.READED
-        }
-      ]
+          state: MessageStateEnum.READED,
+        },
+      ],
     };
-  }
+  },
 );

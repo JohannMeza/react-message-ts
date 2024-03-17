@@ -5,6 +5,7 @@ import { MenuView } from './menu/MenuView';
 import { MenuViewDisplay, MessageViewDisplay } from './dashboard-styles';
 import { useFetchAction } from '@cobuildlab/react-simple-state';
 import { fetchMessagingUser } from './dashboard-actions';
+import { PicturesViewer } from './pictures-viewer/PicturesViewer';
 
 export const MessagingView: FC<PropsWithChildren> = () => {
   const [data] = useFetchAction(fetchMessagingUser, [undefined]);
@@ -14,27 +15,29 @@ export const MessagingView: FC<PropsWithChildren> = () => {
         <Grid
           bgcolor="background_colors_opacity.50"
           sx={MenuViewDisplay(data.id)}
-          position="relative" 
+          position="relative"
           overflow="hidden"
           borderRadius={2}
           xs={12}
           lg={3}
-          item 
+          item
         >
           <MenuView />
         </Grid>
-        <Grid 
+        <Grid
           sx={MessageViewDisplay(data.id)}
-          borderRadius={2} 
-          display="flex" 
-          gap={1} 
+          borderRadius={2}
+          display="flex"
+          gap={1}
           xs={12}
-          lg={9} 
-          item 
+          lg={9}
+          item
         >
           <MessageView />
         </Grid>
       </Grid>
+
+      <PicturesViewer />
     </Box>
   );
 };

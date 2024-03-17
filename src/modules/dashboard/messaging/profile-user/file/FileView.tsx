@@ -1,5 +1,13 @@
 import { FC, PropsWithChildren } from 'react';
-import { Box, Stack, IconButton, Typography, useTheme, Tabs, Tab } from '@mui/material';
+import {
+  Box,
+  Stack,
+  IconButton,
+  Typography,
+  useTheme,
+  Tabs,
+  Tab,
+} from '@mui/material';
 import { useHandleChangeProfileUserView } from '../profile-user-hooks';
 import { ProfileUserCurrentView } from '../profile-user-types';
 import { MultimediaView } from './multimedia/MultimediaView';
@@ -9,11 +17,13 @@ import { LinkView } from './link/LinkView';
 import { useHandleChangeFileView } from './file-hooks';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 
-export const FileView: FC<PropsWithChildren> = () => { 
+export const FileView: FC<PropsWithChildren> = () => {
   const { handleChangeProfileUser } = useHandleChangeProfileUserView();
   const { handleChangeFile, currentView } = useHandleChangeFileView();
-  const handleChange = (_event: React.SyntheticEvent, newValue: FileCurrentViewEnum): void => handleChangeFile(newValue);
-  console.log(currentView);
+  const handleChange = (
+    _event: React.SyntheticEvent,
+    newValue: FileCurrentViewEnum,
+  ): void => handleChangeFile(newValue);
   const theme = useTheme();
 
   const FileViewCurrent = {
@@ -23,24 +33,35 @@ export const FileView: FC<PropsWithChildren> = () => {
   };
 
   return (
-    <Box 
-      display="grid" 
-      gridTemplateRows="auto 1fr" 
-      height={1} 
+    <Box
+      display="grid"
+      gridTemplateRows="auto 1fr"
+      height={1}
       sx={{ borderLeft: `1px solid ${theme.palette.grey[300]}` }}
       padding="22px 10px"
     >
       <Stack flexDirection="row" alignItems="center" gap={2}>
-        <IconButton 
-          onClick={() => handleChangeProfileUser(ProfileUserCurrentView.MAIN, false)}
-          color='default'
+        <IconButton
+          onClick={() =>
+            handleChangeProfileUser(ProfileUserCurrentView.MAIN, false)
+          }
+          color="default"
         >
           <NavigateBeforeIcon />
-        </IconButton> 
-        <Typography fontSize={20} fontWeight={700} color="grey.700">Historial de archivos</Typography>
+        </IconButton>
+        <Typography fontSize={20} fontWeight={700} color="grey.700">
+          Historial de archivos
+        </Typography>
       </Stack>
 
-      <Box>
+      <Box
+        overflow="hidden"
+        sx={{
+          display: 'grid',
+          gridTemplateRows: 'auto 1fr',
+          gap: '16px',
+        }}
+      >
         <Tabs
           value={currentView}
           variant="scrollable"
@@ -48,12 +69,15 @@ export const FileView: FC<PropsWithChildren> = () => {
           scrollButtons={false}
           textColor="primary"
         >
-          <Tab label="Archivos Multimedia" value={FileCurrentViewEnum.MULTIMEDIA} />
+          <Tab
+            label="Archivos Multimedia"
+            value={FileCurrentViewEnum.MULTIMEDIA}
+          />
           <Tab label="Documentos" value={FileCurrentViewEnum.DOCUMENT} />
           <Tab label="Enlaces" value={FileCurrentViewEnum.LINK} />
         </Tabs>
 
-        { FileViewCurrent[currentView] }
+        {FileViewCurrent[currentView]}
       </Box>
     </Box>
   );

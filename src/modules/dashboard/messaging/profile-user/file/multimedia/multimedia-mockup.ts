@@ -1,32 +1,91 @@
-export const multimediaMockup = [
+import { MessageStateEnum } from '@src/modules/dashboard/dashboard-types';
+import { MessagesTypesEnum } from '../../../messaging-types';
+import { MultimediaMockupType } from './multimedia-types';
+
+export const multimediaMockup: MultimediaMockupType[] = [
   {
     month: 'ESTE MES',
     messages: [
       {
-        image: 'https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg',
-        createdAt: ''
+        id: '1234564asdasd',
+        message: 'http://127.0.0.1:5173/messaging',
+        sendId: 'string',
+        createdAt: 15644,
+        receivedId: '15',
+        typeMessage: MessagesTypesEnum.MEDIA_PREVIEW,
+        state: MessageStateEnum.READED,
+        isEdit: true,
+        isNewDay: false,
+        url: 'https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg',
+        fileName: '',
+        name: '',
+        typeFile: 'doc',
       },
       {
-        image: 'https://dealgoritmos.com/wp-content/uploads/2023/05/6d8841b6-9d24-457a-95c5-0d3de1d7bf5f.png',
-        createdAt: ''
+        id: '1234564asdasd',
+        message: 'http://127.0.0.1:5173/messaging',
+        sendId: 'string',
+        createdAt: 15644,
+        receivedId: '15',
+        typeMessage: MessagesTypesEnum.MEDIA_PREVIEW,
+        state: MessageStateEnum.READED,
+        isEdit: true,
+        isNewDay: false,
+        url: 'https://dealgoritmos.com/wp-content/uploads/2023/05/6d8841b6-9d24-457a-95c5-0d3de1d7bf5f.png',
+        fileName: '',
+        name: '',
+        typeFile: 'doc',
       },
       {
-        image: 'https://dealgoritmos.com/wp-content/uploads/2023/05/6d8841b6-9d24-457a-95c5-0d3de1d7bf5f.png',
-        createdAt: ''
+        id: '1234564asdasd',
+        message: 'http://127.0.0.1:5173/messaging',
+        sendId: 'string',
+        createdAt: 15644,
+        receivedId: '15',
+        typeMessage: MessagesTypesEnum.MEDIA_PREVIEW,
+        state: MessageStateEnum.READED,
+        isEdit: true,
+        isNewDay: false,
+        url: 'https://dealgoritmos.com/wp-content/uploads/2023/05/6d8841b6-9d24-457a-95c5-0d3de1d7bf5f.png',
+        fileName: '',
+        name: '',
+        typeFile: 'doc',
       },
-    ]
+    ],
   },
   {
     month: 'SEPTIEMBRE',
     messages: [
       {
-        image: 'https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg',
-        createdAt: ''
+        id: '1234564asdasd',
+        message: 'http://127.0.0.1:5173/messaging',
+        sendId: 'string',
+        createdAt: 15644,
+        receivedId: '15',
+        typeMessage: MessagesTypesEnum.MEDIA_PREVIEW,
+        state: MessageStateEnum.READED,
+        isEdit: true,
+        isNewDay: false,
+        url: 'https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg',
+        fileName: '',
+        name: '',
+        typeFile: 'doc',
       },
       {
-        image: 'https://dealgoritmos.com/wp-content/uploads/2023/05/6d8841b6-9d24-457a-95c5-0d3de1d7bf5f.png',
-        createdAt: ''
+        id: '1234564asdasd',
+        message: 'http://127.0.0.1:5173/messaging',
+        sendId: 'string',
+        createdAt: 15644,
+        receivedId: '15',
+        typeMessage: MessagesTypesEnum.MEDIA_PREVIEW,
+        state: MessageStateEnum.READED,
+        isEdit: true,
+        isNewDay: false,
+        url: 'https://dealgoritmos.com/wp-content/uploads/2023/05/6d8841b6-9d24-457a-95c5-0d3de1d7bf5f.png',
+        fileName: '',
+        name: '',
+        typeFile: 'doc',
       },
-    ]
+    ],
   },
 ];
