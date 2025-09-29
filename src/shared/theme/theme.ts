@@ -25,8 +25,6 @@ declare module '@mui/material/IconButton' {
 }
 
 declare module '@mui/material/styles' {
-  interface PaletteColorOptions {}
-
   interface Palette {
     tertiary: Palette['primary'];
     white: Palette['primary'];
@@ -52,11 +50,6 @@ declare module '@mui/material/styles' {
       [60]: string;
       [600]: string;
     };
-  }
-
-  interface PaletteColorOptions {
-    main: string;
-    contrastText: string;
   }
 }
 
@@ -194,7 +187,7 @@ export const configTheme = <T extends Theme>(themeDefault?: Theme | T): Theme =>
               borderColor: '#E0E3E7',
               fontSize: 16,
               width: 'auto',
-              padding: '4px 12px',
+              padding: '4px 25px',
               transition:
                 themeDefault &&
                 themeDefault.transitions.create([
@@ -347,6 +340,22 @@ export const configTheme = <T extends Theme>(themeDefault?: Theme | T): Theme =>
             },
           },
         ],
+      },
+      MuiIcon: {
+        variants: [
+          {
+            props: { color: 'primary' },
+            style: {
+              color: themeDefault?.palette.blue.main,
+            },
+          },
+          {
+            props: { color: 'error' },
+            style: {
+              color: themeDefault?.palette.red.main,
+            },
+          },
+        ]
       },
       MuiAlert: {
         variants: [

@@ -1,54 +1,83 @@
 import { FC, PropsWithChildren, useRef, useEffect } from 'react';
-import { Avatar, Box, Stack, Typography } from '@mui/material';
 import { Controls } from '@src/shared/component/Controls';
-import { usersMockup } from './search-mockup';
+import { useCallAction } from '@cobuildlab/react-simple-state';
+import { fetchUsersAll } from './search-actions';
+import { useFormSearchUsers, useHandleSearchUsers } from './search-hooks';
+import { Controller } from 'react-hook-form';
+import { Box } from '@mui/material';
+import debounce from 'lodash.debounce';
+import useAuthContext from '@src/shared/hook/useAuthContext';
+import { SearchContain } from './component/SearchContain';
+import { fetchUserDataNotAdded } from '@src/modules/dashboard/dashboard-actions';
 
 export const SearchView: FC<PropsWithChildren> = () => {
+  const { user } = useAuthContext();
+  const { users, reset } = useHandleSearchUsers();
   const inputSearchRef = useRef<HTMLInputElement>(null);
-  useEffect(
-    () => inputSearchRef.current?.querySelector('input')?.focus(),
-    [inputSearchRef],
-  );
+  const [callAction, loading] = useCallAction(fetchUsersAll);
+  const { handleSubmit, control, watch } = useFormSearchUsers({ 
+    defaultValues: { 
+      idUser: user.idUser,
+      username: ''
+    } 
+  });
 
+  const { username } = watch();
+
+  const handleFetchUsers = debounce(() => {
+    const submit = handleSubmit(
+      async (dataForm) => {
+        callAction(dataForm);
+      },
+      async () => {
+        reset();
+      }
+    );
+
+    submit();
+  }, 1000);
+
+  const [callViewUserData] = useCallAction(fetchUserDataNotAdded);
+
+  useEffect(() => {
+    reset();
+    inputSearchRef.current?.querySelector('input')?.focus();
+    return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputSearchRef]);
+
+  useEffect(() => {
+    if (username !== '') {
+      handleFetchUsers();
+    }
+    return () => handleFetchUsers.cancel();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [username]);
+  
   return (
     <Box display="grid" gridTemplateRows="auto 1fr" minHeight={1}>
       <Box paddingX={2} paddingY={2} ref={inputSearchRef}>
-        <Controls.InputComponent
-          variant="primary"
-          placeholder="Buscar solicitudes..."
+        <Controller 
+          name='username'
+          control={control}
+          render={({ field: { onChange, value, ...rest } }) => (
+            <Controls.InputComponent
+              variant="primary"
+              placeholder="Buscar usuarios..."
+              onChange={onChange}
+              value={value}
+              {...rest}
+            />
+          )}
         />
       </Box>
-      <Stack overflow="auto">
-        {usersMockup.map((el, index) => (
-          <Stack
-            sx={{
-              '&:hover': { backgroundColor: 'tertiary.main' },
-              cursor: 'pointer',
-            }}
-            flexDirection="row"
-            alignItems="center"
-            paddingX={2}
-            paddingY={1}
-            gap={2}
-            key={index}
-          >
-            <Avatar src={el.avatar ?? ''} />
-            <Stack gap={0.3} width={1}>
-              <Stack
-                flexDirection="row"
-                justifyContent="space-between"
-                alignItems="center"
-                width={1}
-              >
-                <Typography fontSize={16} fontWeight={700} color="grey.700">
-                  {el.name}
-                </Typography>
-              </Stack>
-              <Typography fontSize={15}>{el.description}</Typography>
-            </Stack>
-          </Stack>
-        ))}
-      </Stack>
+        <SearchContain 
+          loading={loading} 
+          username={username}
+          users={users}
+          idUser={user.idUser}
+          callViewUserData={callViewUserData}
+        />
     </Box>
   );
 };

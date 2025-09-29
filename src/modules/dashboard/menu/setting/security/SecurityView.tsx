@@ -1,16 +1,18 @@
 import { Stack, IconButton, Typography, Box } from '@mui/material';
-import { FC, PropsWithChildren } from 'react';
 import { useHandleChangeSettingView } from '../setting-hooks';
-import { SettingCurrentViewEnum } from '../setting-types';
+import { SettingCurrentViewEnum, SettingSecurityView } from '../setting-types';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import SecutityImage from '@src/assets/security.svg';
 import MessageIcon from '@mui/icons-material/Message';
 import CallIcon from '@mui/icons-material/Call';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-export const SecurityView: FC<PropsWithChildren> = () => {
-  const { handleChangeSetting } = useHandleChangeSettingView();
 
+export const SecurityView = <T extends SettingSecurityView>(
+  props: T,
+): React.ReactElement => {
+  const { handleChangeSetting } = useHandleChangeSettingView();
+  console.log(props);
   return (
     <Box height={1} display="grid" gridTemplateRows="auto 1fr">
       <Stack flexDirection="row" alignItems="center" gap={2} padding="10px">

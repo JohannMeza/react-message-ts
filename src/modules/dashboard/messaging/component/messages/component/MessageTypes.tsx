@@ -1,6 +1,6 @@
 import { Typography, Box, Stack } from '@mui/material';
 import { ReactNode } from 'react';
-import { getPastDate } from '@src/modules/dashboard/dashboard-functions';
+import { getPastDateString } from '@src/modules/dashboard/dashboard-functions';
 import {
   MessageDocument,
   MessageImagePreview,
@@ -26,19 +26,27 @@ import { MessageStateIcon } from '../message-states';
 import { useHandleActivePicturesViewer } from '@src/modules/dashboard/pictures-viewer/pictures-viewer-hooks';
 import moment from 'moment';
 import InsertLinkIcon from '@mui/icons-material/InsertLink';
+import { ComunicationTypesEnum } from '@src/shared/types/base/message/message-types';
 
 export const MessageNormalBox = <T extends MessageNormalBoxType>(
   props: T,
 ): React.ReactElement => (
   <>
     {props.isNewDay && (
-      <MessageInfoDay>{getPastDate(props.createdAt)}</MessageInfoDay>
+      <MessageInfoDay 
+        className={'date-message-info'}
+      >{getPastDateString(props.sendDateTime)}
+      </MessageInfoDay>
     )}
-    <MessageNormal isendme={props.receivedId === props.sendId ? 'true' : ''}>
+    <MessageNormal isendme={props.idTypeComunication === ComunicationTypesEnum.TRANSMITER ? 'true' : ''}>
       {props.message}
 
-      <MessagePopper />
-
+      <MessagePopper 
+        idContactMessage={props.idContactMessage}
+        messageEdit={props.message}
+        batchMessage={props.batchMessage}
+      />
+    
       <Box
         marginLeft={1}
         sx={{
@@ -53,9 +61,9 @@ export const MessageNormalBox = <T extends MessageNormalBoxType>(
             {props.isEdit && 'Editado'}
           </Typography>
           <Typography fontSize={12} fontWeight={600} textAlign="end">
-            {moment(props.createdAt).format('HH:mm a')}
+            {moment(props.sendDateTime).format('HH:mm a')}
           </Typography>
-          {props.receivedId === props.sendId && MessageStateIcon[props.state]}
+          {props.idTypeComunication === ComunicationTypesEnum.TRANSMITER && MessageStateIcon[props.state]}
         </Box>
       </Box>
     </MessageNormal>
@@ -70,7 +78,7 @@ export const MessageLockedBox = <T extends MessageLockedBoxType>(
   props: T,
 ): ReactNode => (
   <MessageLocked>
-    {props.receivedId === props.sendId
+    {props.idTypeComunication === ComunicationTypesEnum.TRANSMITER
       ? 'Has bloqueado a este usuario'
       : 'Johann Meza te ha bloqueado'}
   </MessageLocked>
@@ -129,7 +137,7 @@ export const MessageDocumentBox = <T extends MessageDocumentBoxType>(
   }));
 
   return (
-    <MessageDocument isendme={props.receivedId === props.sendId ? 'true' : ''}>
+    <MessageDocument isendme={props.idTypeComunication === ComunicationTypesEnum.TRANSMITER ? 'true' : ''}>
       <Stack flexDirection="row" alignItems="center" gap={2}>
         <StyleLinkBox>
           <InsertLinkIcon />
@@ -146,7 +154,11 @@ export const MessageDocumentBox = <T extends MessageDocumentBoxType>(
         </Stack>
       </Stack>
 
-      <MessagePopper />
+      <MessagePopper 
+        idContactMessage={props.idContactMessage}
+        batchMessage={props.batchMessage}
+        messageEdit={props.message}
+      />
 
       <Box>
         <Typography component="span">{message}</Typography>
@@ -166,7 +178,7 @@ export const MessageDocumentBox = <T extends MessageDocumentBoxType>(
             <Typography fontSize={12} fontWeight={600} textAlign="end">
               {moment(props.createdAt).format('HH:mm a')}
             </Typography>
-            {props.receivedId === props.sendId && MessageStateIcon[props.state]}
+            {props.idTypeComunication === ComunicationTypesEnum.TRANSMITER && MessageStateIcon[props.state]}
           </Box>
         </Box>
       </Box>
@@ -177,7 +189,7 @@ export const MessageDocumentBox = <T extends MessageDocumentBoxType>(
 export const MessageLinkBox = <T extends MessageLinkBoxType>(
   props: T,
 ): ReactNode => {
-  const { message, isEdit, createdAt, sendId, receivedId, state } = props;
+  const { message, isEdit, createdAt, state } = props;
 
   const StyleLinkBox = styled(Stack)(({ theme }) => ({
     minWidth: '75px',
@@ -200,7 +212,7 @@ export const MessageLinkBox = <T extends MessageLinkBoxType>(
   }));
 
   return (
-    <MessageDocument isendme={props.receivedId === props.sendId ? 'true' : ''}>
+    <MessageDocument isendme={props.idTypeComunication === ComunicationTypesEnum.TRANSMITER ? 'true' : ''}>
       <Stack flexDirection="row" alignItems="center" gap={2}>
         <StyleLinkBox>
           <InsertLinkIcon />
@@ -243,7 +255,7 @@ export const MessageLinkBox = <T extends MessageLinkBoxType>(
             <Typography fontSize={12} fontWeight={600} textAlign="end">
               {moment(createdAt).format('HH:mm a')}
             </Typography>
-            {receivedId === sendId && MessageStateIcon[state]}
+            {props.idTypeComunication === ComunicationTypesEnum.TRANSMITER && MessageStateIcon[state]}
           </Box>
         </Box>
       </Box>

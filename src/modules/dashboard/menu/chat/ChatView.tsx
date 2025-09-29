@@ -19,15 +19,20 @@ import { SearchView } from './search/SearchView';
 import { useHandleChangeMenuView } from '../menu-hooks';
 import { MenuCurrentViewEnum } from '../menu-types';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import useAuthContext from '@src/shared/hook/useAuthContext';
 
 export const ChatView: FC<PropsWithChildren> = () => {
+  const { user } = useAuthContext();
   const { handleChangeMenu } = useHandleChangeMenuView();
   const { tab, handleTabsMenu } = useHandleTabsMenu();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const { logout } = useAuthContext();
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void =>
     setAnchorEl(event.currentTarget);
-  const handleClose = (): void => setAnchorEl(null);
+  const handleClose = (): void => {
+    setAnchorEl(null);
+  };
   const handleChange = (
     _event: React.SyntheticEvent,
     newValue: MenuTabsEnum,
@@ -55,6 +60,7 @@ export const ChatView: FC<PropsWithChildren> = () => {
       display="grid"
       gridTemplateRows="auto auto 1fr"
       maxHeight={1}
+      height={1}
       position="relative"
       overflow="hidden"
     >
@@ -69,7 +75,7 @@ export const ChatView: FC<PropsWithChildren> = () => {
         <Stack flexDirection="row" alignItems="center" gap={2}>
           <Avatar />
           <Typography fontSize={20} fontWeight={800} color="grey.700">
-            Johann Meza
+            { user.name }
           </Typography>
         </Stack>
 
@@ -104,7 +110,7 @@ export const ChatView: FC<PropsWithChildren> = () => {
           <MenuItem onClick={() => handleOpenMenu(MenuCurrentViewEnum.SETTING)}>
             Configuración
           </MenuItem>
-          <MenuItem onClick={handleClose}>Cerrar Sesión</MenuItem>
+          <MenuItem onClick={() => logout()}>Cerrar Sesión</MenuItem>
         </Menu>
       </Stack>
       <Tabs

@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import {
   ClickAwayListener,
   Grow,
@@ -9,8 +9,17 @@ import {
 } from '@mui/material';
 import { MessageNormalIconButton } from '../message-styles';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { messageEditEvent } from '../message-events';
 
-export const MessagePopper: FC<PropsWithChildren> = () => {
+export const MessagePopper: FC<{
+  idContactMessage: number,
+  messageEdit: string,
+  batchMessage: string
+}> = ({
+  idContactMessage,
+  messageEdit,
+  batchMessage
+}) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLDivElement>(null);
   const handleToggle = (): void => setOpen((prevOpen) => !prevOpen);
@@ -32,6 +41,16 @@ export const MessagePopper: FC<PropsWithChildren> = () => {
     } else if (event.key === 'Escape') {
       setOpen(false);
     }
+  };
+
+  const handleMessageEdit = (e: Event | React.SyntheticEvent): void => {
+    messageEditEvent.dispatch({ 
+      idContactMessage,
+      message: messageEdit,
+      batchMessage
+    });
+
+    handleClose(e);
   };
 
   useEffect(() => {
@@ -78,7 +97,7 @@ export const MessagePopper: FC<PropsWithChildren> = () => {
                   aria-labelledby="composition-button"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={handleMessageEdit}>Editar</MenuItem>
                   <MenuItem onClick={handleClose}>My account</MenuItem>
                   <MenuItem onClick={handleClose}>Logout</MenuItem>
                 </MenuList>

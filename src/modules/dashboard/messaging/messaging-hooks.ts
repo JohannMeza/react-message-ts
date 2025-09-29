@@ -1,6 +1,9 @@
 import { useEvent } from '@cobuildlab/react-simple-state';
 import { ActiveProfileUserEnum } from './messaging-types';
 import { activeProfileUserViewEvent } from './messaging-events';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm, UseFormProps, UseFormReturn } from 'react-hook-form';
+import { formMessagingSend } from './messaging-validators';
 
 interface HandleChangeActiveProfileUserType {
   currentView: ActiveProfileUserEnum;
@@ -21,3 +24,8 @@ export const useHandleActiveProfileUser =
       handleChangeActiveProfileUser,
     };
   };
+
+export const useFormMessagingSend = (props?: UseFormProps<{ message: string }>): UseFormReturn<{ message: string }> => useForm<{ message: string }>({
+  resolver: yupResolver(formMessagingSend, { abortEarly: false }),
+  ...props
+});

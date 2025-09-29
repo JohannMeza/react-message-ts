@@ -3,30 +3,83 @@ import {
   messagingOpenEvent,
   messagingOpenEventError,
 } from './menu/chat/chat-events';
-import { MessagesTypesEnum, MessagingType } from './menu/chat/chat-types';
-import { MessageStateEnum } from './dashboard-types';
+import { contactDataEvent, contactDataEventError } from './dashboard-events';
+import { axiosService } from '@src/shared/service/axios';
+import { Response } from '@src/shared/types/type';
+import { AxiosResponse } from 'axios';
+import { APP_CONTACT_PATH, APP_MESSAGES_PATH, APP_USER_PATH } from '@src/shared/constant/paths';
+import { ContactProps } from '@src/shared/types/base/contact/contact-types';
+import { MessagesType } from './messaging/messaging-types';
 
 export const fetchMessagingUser = createAction(
   messagingOpenEvent,
   messagingOpenEventError,
-  async (messagingId: string | undefined): Promise<MessagingType> => {
-    if (!messagingId) return { id: null, messages: [] };
-    return {
-      id: messagingId,
-      messages: [
-        {
-          id: 'string',
-          name: 'string',
-          message: '',
-          sendId: '',
-          receivedId: '',
-          typeMessage: MessagesTypesEnum.LOCKED,
-          createdAt: 12345,
-          isEdit: true,
-          isNewDay: true,
-          state: MessageStateEnum.READED,
-        },
-      ],
-    };
+  async (idContact: number): Promise<MessagesType[]> => {
+    try {
+      if (!idContact) return [];
+
+      const response = await axiosService<
+        Response<{ dataList: MessagesType[] }>,
+        AxiosResponse<Response<{ dataList: MessagesType[] }>>
+      >({
+        method: 'POST',
+        url: APP_MESSAGES_PATH.CONTACT,
+        data: {
+          idContact
+        }
+      });
+
+      return response.data.dataList;
+    } catch (error) {
+      const message = `Error ${error}`;
+      console.error(message);
+      throw error;
+    }
   },
+);
+
+export const fetchUserDataNotAdded = createAction(
+  contactDataEvent,
+  contactDataEventError,
+  async (idUser: number, idUserContact: number): Promise<ContactProps> => {
+    try {
+      const resp = await axiosService<
+        Response<{ dataObject: ContactProps }>,
+        AxiosResponse<Response<{ dataObject: ContactProps }>>
+      >({
+        method: 'POST',
+        url: APP_USER_PATH.FIND_ONE,
+        data: {
+          idUser: idUser,
+          idUserContact: idUserContact
+        }
+      });
+      return resp.data.dataObject;
+    } catch (error) {
+      const message = `Error ${error}`;
+      console.error(message);
+      throw error;
+    }
+  }
+);
+
+export const fetchContactData = createAction(
+  contactDataEvent,
+  contactDataEventError,
+  async (idContact: number): Promise<ContactProps> => {
+    try {
+      const resp = await axiosService<
+      Response<{ dataObject: ContactProps }>,
+      AxiosResponse<Response<{ dataObject: ContactProps }>>
+      >({
+        method: 'POST',
+        url: `${APP_CONTACT_PATH.ONE}/${idContact}`,
+      });
+      return resp.data.dataObject;
+    } catch (error) {
+      const message = `Error ${error}`;
+      console.error(message);
+      throw error;
+    }
+  }
 );

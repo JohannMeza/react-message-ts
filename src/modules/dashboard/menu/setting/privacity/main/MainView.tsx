@@ -1,17 +1,24 @@
-import { Stack, IconButton, Typography, Box, Checkbox } from '@mui/material';
-import { FC, PropsWithChildren } from 'react';
-import { SettingCurrentViewEnum } from '../../setting-types';
+import { Stack, IconButton, Typography, Box } from '@mui/material';
+import { ItemSettingOptionProp, SettingCurrentViewEnum } from '../../setting-types';
 import { useHandleChangeSettingView } from '../../setting-hooks';
+import { ItemSettingBox } from '../../component/ItemSetting';
+import { ItemPrivacyMain } from '../privacity-types';
 import { useHandleChangePrivacityView } from '../privacity-hooks';
-import { PrivacityCurrentViewEnum } from '../privacity-types';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { ListSettingBox } from '@src/modules/dashboard/component/ContainedBoxView';
+import { useEffect } from 'react';
 
-export const MainView: FC<PropsWithChildren> = () => {
-  const { handleChangeSetting } = useHandleChangeSettingView();
-  const { handleChangePrivacity } = useHandleChangePrivacityView();
-
+export const MainView = <T extends ItemPrivacyMain>(
+  props: T
+): React.ReactElement => {
+  const { handleChangeSetting, props: propsSetting } = useHandleChangeSettingView();
+  const { handleChangePrivacity, handleChangeProps } = useHandleChangePrivacityView();
+  
+  useEffect(() => {
+    handleChangeProps(propsSetting.props);
+    return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
   return (
     <Box height={1} display="grid" gridTemplateRows="auto 1fr">
       <Stack flexDirection="row" alignItems="center" gap={2} padding="10px">
@@ -24,108 +31,29 @@ export const MainView: FC<PropsWithChildren> = () => {
           <NavigateBeforeIcon />
         </IconButton>
         <Typography fontSize={20} fontWeight={700} color="grey.700">
-          Privacidad
+          { props.title }
         </Typography>
       </Stack>
       <Stack height={1} overflow="auto">
-        <Box>
-          <Typography padding="10px" fontSize={16} fontWeight={600}>
-            ¿Quién puede ver mi información personal?
-          </Typography>
-          <ListSettingBox
-            onClick={() =>
-              handleChangePrivacity(PrivacityCurrentViewEnum.ONLINE, false)
-            }
-          >
+        {
+          propsSetting.props.data?.map((el) => (
             <Box>
-              <Typography fontSize={16} fontWeight={500} color="grey.700">
-                Hora de últ. vez y En Linea
-              </Typography>
-              <Typography fontSize={14} color="grey.700">
-                Todos
-              </Typography>
+              <ItemSettingBox { ...el as unknown as ItemSettingOptionProp } />
+              {
+                el.children.map((item, index) => (
+                  <ItemSettingBox key={index} handleClick={() => {
+                    handleChangeProps({
+                      data: item.children,
+                      title: item.configuration,
+                      view: item.view
+                    });
+                    handleChangePrivacity(item.view, false);
+                  }} { ...item } />
+                ))
+              }
             </Box>
-            <ChevronRightIcon />
-          </ListSettingBox>
-          <ListSettingBox
-            onClick={() =>
-              handleChangePrivacity(PrivacityCurrentViewEnum.PROFILE, false)
-            }
-          >
-            <Box>
-              <Typography fontSize={16} fontWeight={500} color="grey.700">
-                Foto de perfil
-              </Typography>
-              <Typography fontSize={14} color="grey.700">
-                Todos
-              </Typography>
-            </Box>
-            <ChevronRightIcon />
-          </ListSettingBox>
-          <ListSettingBox
-            onClick={() =>
-              handleChangePrivacity(PrivacityCurrentViewEnum.INFORMATION, false)
-            }
-          >
-            <Box>
-              <Typography fontSize={16} fontWeight={500} color="grey.700">
-                Info
-              </Typography>
-              <Typography fontSize={14} color="grey.700">
-                Todos
-              </Typography>
-            </Box>
-            <ChevronRightIcon />
-          </ListSettingBox>
-          <ListSettingBox>
-            <Box>
-              <Typography fontSize={16} fontWeight={500} color="grey.700">
-                Confirmaciones de lectura
-              </Typography>
-              <Typography fontSize={14} color="grey.700">
-                Si desactivas las confirmaciones de lectura, no podrás enviarlas
-                ni recibirlas. Las confirmaciones de lectura se enviarán siempre
-                en los chats grupales.
-              </Typography>
-            </Box>
-            <Checkbox />
-          </ListSettingBox>
-        </Box>
-        <Box>
-          <Typography padding="10px" fontSize={16} fontWeight={600}>
-            Chats
-          </Typography>
-          <ListSettingBox
-            onClick={() =>
-              handleChangePrivacity(PrivacityCurrentViewEnum.GROUP, false)
-            }
-          >
-            <Box>
-              <Typography fontSize={16} fontWeight={500} color="grey.700">
-                Grupos
-              </Typography>
-              <Typography fontSize={14} color="grey.700">
-                Todos
-              </Typography>
-            </Box>
-            <ChevronRightIcon />
-          </ListSettingBox>
-          <ListSettingBox
-            onClick={() =>
-              handleChangePrivacity(PrivacityCurrentViewEnum.LOCKED, false)
-            }
-          >
-            <Box>
-              <Typography fontSize={16} fontWeight={500} color="grey.700">
-                Contactos Bloqueados
-              </Typography>
-              <Typography fontSize={14} color="grey.700">
-                4
-              </Typography>
-            </Box>
-            <ChevronRightIcon />
-          </ListSettingBox>
-        </Box>
+          ))
+        }
       </Stack>
     </Box>
   );

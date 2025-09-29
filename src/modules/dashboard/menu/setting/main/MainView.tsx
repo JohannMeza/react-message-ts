@@ -1,21 +1,24 @@
-import { FC, PropsWithChildren } from 'react';
 import { IconButton, Typography, Stack, Avatar } from '@mui/material';
 import { useHandleChangeSettingView } from '../setting-hooks';
-import { SettingCurrentViewEnum } from '../setting-types';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import SecurityIcon from '@mui/icons-material/Security';
-import LockIcon from '@mui/icons-material/Lock';
-import Brightness6Icon from '@mui/icons-material/Brightness6';
-import LogoutIcon from '@mui/icons-material/Logout';
+import { SettingCurrentViewEnum, SettingBoxType, SettingMainView } from '../setting-types';
 import { useHandleChangeMenuView } from '../../menu-hooks';
 import { MenuCurrentViewEnum } from '../../menu-types';
 import { ListSettingBox } from '@src/modules/dashboard/component/ContainedBoxView';
+import useAuthContext from '@src/shared/hook/useAuthContext';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+// import SecurityIcon from '@mui/icons-material/Security';
+// import LockIcon from '@mui/icons-material/Lock';
+// import Brightness6Icon from '@mui/icons-material/Brightness6';
+import LogoutIcon from '@mui/icons-material/Logout';
 
-export const MainView: FC<PropsWithChildren> = () => {
+export const MainView = <T extends SettingMainView>(
+  props: T,
+): React.ReactElement => {
+  const { logout } = useAuthContext();
   const { handleChangeMenu } = useHandleChangeMenuView();
-  const { handleChangeSetting } = useHandleChangeSettingView();
-
+  const { handleChangeSetting, handleChangeProps } = useHandleChangeSettingView();
+  const { data } = props;
   return (
     <>
       <Stack flexDirection="row" alignItems="center" gap={2} padding="10px">
@@ -39,9 +42,9 @@ export const MainView: FC<PropsWithChildren> = () => {
           cursor: 'pointer',
           userSelect: 'none',
         }}
-        onClick={() =>
-          handleChangeSetting(SettingCurrentViewEnum.PROFILE, false)
-        }
+        onClick={() => {
+          handleChangeSetting(SettingCurrentViewEnum.PROFILE, false);
+        }}
       >
         <Avatar sx={{ width: 80, height: 80 }} />
         <Stack>
@@ -52,7 +55,29 @@ export const MainView: FC<PropsWithChildren> = () => {
         </Stack>
       </Stack>
       <Stack marginTop={2}>
-        <ListSettingBox
+        {
+          data?.map((el) => (
+            <ListSettingBox
+              onClick={() => {
+                handleChangeSetting(el.view, false);
+                handleChangeProps({ 
+                  props: {
+                    data: el.children,
+                    title: el.configuration
+                  }
+                } as SettingBoxType);
+              }}
+            >
+              <Stack flexDirection="row" gap={2}>
+                <NotificationsIcon color="action" />
+                <Typography fontSize={16} fontWeight={500} color="grey.700">
+                  {el.configuration}
+                </Typography>
+              </Stack>
+            </ListSettingBox>
+          ))
+        }
+        {/* <ListSettingBox
           onClick={() =>
             handleChangeSetting(SettingCurrentViewEnum.NOTIFICATION, false)
           }
@@ -95,8 +120,8 @@ export const MainView: FC<PropsWithChildren> = () => {
               Tema
             </Typography>
           </Stack>
-        </ListSettingBox>
-        <ListSettingBox>
+        </ListSettingBox> */}
+        <ListSettingBox onClick={logout}>
           <Stack flexDirection="row" gap={2}>
             <LogoutIcon color="error" />
             <Typography fontSize={16} fontWeight={500} color="red.main">

@@ -1,4 +1,4 @@
-import { MONTHS_NAME, WEEKDAYS_NAME } from '@src/shared/constant/configMoments';
+import { MONTHS_NAME, WEEKDAYS_NAME } from '@src/shared/constant/moments';
 import moment from 'moment';
 
 moment.locale('es', { weekdays: WEEKDAYS_NAME, months: MONTHS_NAME });
@@ -30,4 +30,14 @@ export const getPastDate = (createdAt: number): string => {
   if (countDaysAgo === 0) return 'Hoy';
   else if (countDaysAgo < 7) return moment(createdAt).format('dddd');
   else return moment(createdAt).format('DD/MM/YYYY');
+};
+
+export const getPastDateString = (createdAt: string): string => {
+  const parsedDate = moment(createdAt, 'YYYY-MM-DD HH:mm:ss.SSSSSS');
+
+  const countDaysAgo = moment().diff(parsedDate, 'days');
+
+  if (countDaysAgo === 0) return 'Hoy';
+  else if (countDaysAgo < 7) return parsedDate.format('dddd');
+  else return parsedDate.format('DD/MM/YYYY');
 };

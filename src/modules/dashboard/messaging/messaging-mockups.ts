@@ -1,6 +1,25 @@
 import { MessageStateEnum } from '../dashboard-types';
 import { MessagesType, MessagesTypesEnum } from './messaging-types';
 
+export const messageInitial: MessagesType[] = [
+  {
+    id: 'string',
+    name: 'string',
+    message:
+      'Los mensajes son cifrados de extremo a extremo.',
+    sendId: '1',
+    receivedId: '15',
+    createdAt: 1696698883341,
+    state: MessageStateEnum.READED,
+    typeMessage: MessagesTypesEnum.NOTIFICATION,
+    isNewDay: false,
+    isEdit: false,
+    url: '',
+    fileName: '',
+    typeFile: 'doc',
+  },
+];
+
 export const messagesMockup: MessagesType[] = [
   {
     id: 'string',

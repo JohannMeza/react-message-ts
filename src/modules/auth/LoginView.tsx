@@ -1,13 +1,41 @@
-import { Box, Button, Grid, Paper, Typography } from '@mui/material';
+import { Box, Paper, Typography, Button } from '@mui/material';
 import { FC, PropsWithChildren } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Controls } from '@src/shared/component/Controls';
+import { useFormSignIn } from './auth-hooks';
+import { Controller } from 'react-hook-form';
+import { useCallAction } from '@cobuildlab/react-simple-state';
+import { signInAction } from './auth-actions';
+import { snackbar } from '@src/shared/component/ui/snackbar/Snackbar';
+import { APP_TOKEN_AUTH } from '@src/shared/constant/envs';
+import Grid from '@mui/material/Grid2';
 import ImageLogotipo from '@src/assets/logo.svg';
+import useAuthContext from '@src/shared/hook/useAuthContext';
 
 export const LoginView: FC<PropsWithChildren> = () => {
-  const navigate = useNavigate();
+  const { access } = useAuthContext();
 
-  const submitFormLogin = (): void => navigate('/messaging');
+  const { handleSubmit, control, formState }  = useFormSignIn();
+  const [callSignIn, loading] = useCallAction(signInAction, {
+    async onCompleted(res) {
+      snackbar.success(res?.message || '');
+      sessionStorage.setItem(APP_TOKEN_AUTH, `Bearer ${res.dataObject.token}`);
+      access();
+    },
+    async onError(err) {
+      snackbar.any({
+        message: err.text,
+        title: err.title || 'Error',
+        type: err.type || 'error'
+      });
+    },
+  });
+
+  const submitFormLogin = handleSubmit(
+    async (dataForm) => {
+      callSignIn(dataForm);
+    }
+  );
 
   return (
     <Box height={1} display="flex" justifyContent="center" alignItems="center">
@@ -26,20 +54,56 @@ export const LoginView: FC<PropsWithChildren> = () => {
           <img src={ImageLogotipo} alt="Logotipo pipedrive" />
         </Box>
         <Grid container spacing={3} component="form" onSubmit={submitFormLogin}>
-          <Grid item xs={12}>
-            <Controls.InputComponent variant="rounded" label="Email" />
+          <Grid size={12}>
+            <Controller 
+              name='username'
+              control={control}
+              render={({ field: { onChange, value, ...rest } }) => (
+                <Controls.InputComponent 
+                  variant="rounded" 
+                  label="Usuario" 
+                  value={value}
+                  onChange={onChange}
+                  error={!!formState.errors.username?.message}
+                  helperText={formState.errors.username?.message}
+                  required
+                  {...rest}
+                />
+              )}
+            />
           </Grid>
-          <Grid item xs={12}>
-            <Controls.InputComponent variant="rounded" label="Contraseña" />
+          <Grid size={12}>
+            <Controller 
+              name='password'
+              control={control}
+              render={({ field: { onChange, value, ...rest } }) => (
+                <Controls.InputComponent 
+                  type='password'
+                  variant="rounded"
+                  label="Contraseña" 
+                  value={value}
+                  onChange={onChange}
+                  error={!!formState.errors.password?.message}
+                  helperText={formState.errors.password?.message}
+                  required
+                  {...rest}
+                />
+              )}
+            />
           </Grid>
-          <Grid item xs={12}>
+          <Grid size={12}>
             <Box
               display="flex"
               alignItems="center"
               flexDirection="column"
               gap={1}
             >
-              <Button type="submit" variant="outlined">
+              <Button
+                type="submit" 
+                variant="outlined" 
+                loading={loading}
+                onClick={submitFormLogin}
+              >
                 Iniciar Sesión
               </Button>
               <Typography

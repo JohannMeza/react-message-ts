@@ -58,6 +58,18 @@ module.exports = {
         patterns: ['@material-ui/*/*/*', '!@material-ui/core/test-utils/*'],
       },
     ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "args": "all",
+        "argsIgnorePattern": "^_",
+        "caughtErrors": "all",
+        "caughtErrorsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ],
     '@typescript-eslint/space-before-blocks': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
     "@typescript-eslint/quotes": [
@@ -109,18 +121,19 @@ module.exports = {
       },
     ],
     'no-unused-vars': [
-      'error',
+      'error',  // Nivel de severidad (error)
       {
-        vars: 'all',
-        args: 'none',
-        ignoreRestSiblings: false,
-      },
+        vars: 'all',  // Aplica la regla a todas las variables
+        args: 'none',  // No verifica los argumentos no utilizados
+        ignoreRestSiblings: false,  // No ignora las variables "rest" de los hermanos
+        argsIgnorePattern: '^_'  // Ignora las variables cuyo nombre comienza con '_'
+      }
     ],
     'jsx-a11y/anchor-is-valid': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     'react/prop-types': 'off',
     'react/destructuring-assignment': 'off',
-    'react/no-unused-prop-types': 'error',
+    // 'react/no-unused-prop-types': 'error',
     'react/jsx-props-no-spreading': 'off',
     'react/require-default-props': 'off',
     'react/jsx-filename-extension': [

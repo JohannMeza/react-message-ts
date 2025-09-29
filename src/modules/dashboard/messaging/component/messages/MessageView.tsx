@@ -25,7 +25,7 @@ export const MessageItemView = <T extends MessageItemType>(
     [MessagesTypesEnum.MEDIA]: MessageMediaBox,
     [MessagesTypesEnum.MEDIA_PREVIEW]: MessageMediaPreviewBox,
   };
-
+  
   const ComponentTest = typesMessages[props.typeMessage];
   return <ComponentTest {...props} />;
 };

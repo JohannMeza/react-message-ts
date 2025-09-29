@@ -32,59 +32,68 @@ export interface MessageComponentProps {
 }
 
 export interface MessageNormalBoxType {
+  idContactMessage: number;
   typeMessage: MessagesTypesEnum;
   message: string;
-  sendId: string;
+  batchMessage: string;
+  idTypeComunication: number;
+  sendDateTime: string;
+  idContactMessageState: number;
   createdAt: number;
-  receivedId: string;
   isEdit: boolean;
   state: MessageStateEnum;
   isNewDay: boolean;
 }
 
 export interface MessageInfoBoxType {
+  idContactMessage: number;
   typeMessage: MessagesTypesEnum;
   message: string;
+  batchMessage: string;
 }
 
 export interface MessageLockedBoxType {
+  idContactMessage: number;
   typeMessage: MessagesTypesEnum;
-  receivedId: string;
-  sendId: string;
+  idTypeComunication: number;
 }
 
 export interface MessageNotificationBoxType {
+  idContactMessage: number;
   typeMessage: MessagesTypesEnum;
   message: string;
+  batchMessage: string;
 }
 
 export interface MessageMediaBoxType {
+  idContactMessage: number;
   typeMessage: MessagesTypesEnum;
   url: string;
   message: string;
-  sendId: string;
-  receivedId: string;
+  batchMessage: string;
+  idTypeComunication: number;
   createdAt: number;
   state: MessageStateEnum;
 }
 
 export interface MessageMediaPreviewBoxType {
+  idContactMessage: number;
   typeMessage: MessagesTypesEnum;
   url: string;
   message: string;
-  sendId: string;
-  receivedId: string;
+  batchMessage: string;
+  idTypeComunication: number;
   createdAt: number;
   state: MessageStateEnum;
 }
 
 export interface MessageDocumentBoxType {
-  id: string;
+  idContactMessage: number;
   typeMessage: MessagesTypesEnum;
   fileName: string;
   message: string;
-  sendId: string;
-  receivedId: string;
+  batchMessage: string;
+  idTypeComunication: number;
   createdAt: number;
   isEdit: boolean;
   typeFile: DocumentType;
@@ -92,11 +101,11 @@ export interface MessageDocumentBoxType {
 }
 
 export interface MessageLinkBoxType {
+  idContactMessage: number;
   typeMessage: MessagesTypesEnum;
-  id: string;
   message: string;
-  sendId: string;
-  receivedId: string;
+  batchMessage: string;
+  idTypeComunication: number;
   createdAt: number;
   isEdit: boolean;
   state: MessageStateEnum;

@@ -1,18 +1,17 @@
-import { FC, PropsWithChildren } from 'react';
 import {
   Stack,
   IconButton,
   Typography,
-  FormControl,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
+  Divider,
 } from '@mui/material';
-import { PrivacityCurrentViewEnum } from '../privacity-types';
+import { ItemPrivacyInformation, PrivacityCurrentViewEnum } from '../privacity-types';
 import { useHandleChangePrivacityView } from '../privacity-hooks';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import { ItemSettingBox } from '../../component/ItemSetting';
 
-export const InformationView: FC<PropsWithChildren> = () => {
+export const InformationView = <T extends ItemPrivacyInformation>(
+  props: T
+): React.ReactElement => {
   const { handleChangePrivacity } = useHandleChangePrivacityView();
 
   return (
@@ -30,26 +29,17 @@ export const InformationView: FC<PropsWithChildren> = () => {
           Información
         </Typography>
       </Stack>
-      <Stack paddingX="20px" paddingY="10px" gap={1}>
-        <Typography fontSize={16} fontWeight={600}>
-          Quien puede ver mi info.
-        </Typography>
-        <FormControl>
-          <RadioGroup defaultValue="todos" name="information">
-            <FormControlLabel value="todos" control={<Radio />} label="Todos" />
-            <FormControlLabel
-              value="mis_contactos"
-              control={<Radio />}
-              label="Mis contactos"
-            />
-            <FormControlLabel
-              value="mis_contactos_excepto"
-              control={<Radio />}
-              label="Mis contactos, excepto"
-            />
-            <FormControlLabel value="nadie" control={<Radio />} label="Nadie" />
-          </RadioGroup>
-        </FormControl>
+      <Stack paddingX="20px" paddingY="10px" gap={3}>
+        {
+          props.data.map((el) => (
+            <>
+              <Stack gap={1}>
+                <ItemSettingBox { ...el } />
+              </Stack>
+              { props.data.length !== 1 && <Divider /> }
+            </>
+          ))
+        }
       </Stack>
     </>
   );

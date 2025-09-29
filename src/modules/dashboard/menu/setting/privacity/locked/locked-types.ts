@@ -1,5 +1,5 @@
-export interface ContactsType {
-  avatar: string | null;
-  name: string;
-  description: string;
+import { ContactProps } from '../../../chat/contact/contact-types';
+
+export interface ContactsViewLockedProps extends Omit<ContactProps, 'lastMessage' | 'createdDate'> {
+  description: string
 }

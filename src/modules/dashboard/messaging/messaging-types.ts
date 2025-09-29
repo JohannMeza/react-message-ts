@@ -1,5 +1,7 @@
+import { ContactStateType } from '@src/shared/types/base/contact/contact-types';
 import { MessageStateEnum } from '../dashboard-types';
 import { DocumentType } from './component/messages/message-types';
+import { FC, PropsWithChildren } from 'react';
 
 export enum MessagesTypesEnum {
   NORMAL = 'TYPE_1',
@@ -26,12 +28,19 @@ export enum ActiveProfileUserEnum {
   PROFILE_USER = 'profile_user',
 }
 
+export enum MessagingContainer {
+  UNKNOWN = 'UNKNOWN',
+  CONTACT = 'CONTACT'
+}
+
 export interface MessagesType {
-  id: string;
+  idContactMessage: number;
   name: string;
   message: string;
-  sendId: string;
-  receivedId: string;
+  batchMessage: string
+  idTypeComunication: number;
+  sendDateTime: string;
+  idContactMessageState: number;
   createdAt: number;
   state: MessageStateEnum;
   typeMessage: MessagesTypesEnum;
@@ -45,4 +54,29 @@ export interface MessagesType {
 export interface MessagingType {
   id: string | null;
   messages: MessagesType[];
+}
+
+export interface RequestFriendProps {
+  idUserSend: number
+  idUserReceived: number
+}
+
+export interface BoxSendingProps extends SendMessageContactProps {
+  stateContact: ContactStateType
+}
+
+export interface BoxUpdateProps {
+  onUpdateMessage: (message: string, batchMessage: string) => void
+  message: string
+  batchMessage: string
+}
+
+export interface SectionSendMessageTypes {
+  [ContactStateType.BLOCKED]: FC<PropsWithChildren>;
+  [ContactStateType.CONTACT]: FC<SendMessageContactProps>;
+  [ContactStateType.DELETED]: FC<PropsWithChildren>;
+}
+
+export interface SendMessageContactProps {
+  onSendMessage: (message: string) => void
 }

@@ -45,7 +45,7 @@ export const MessageNotification = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
 }));
 
-export const MessageInfoDay = styled(Paper)(({ theme }) => ({
+export const MessageInfoDay = styled('span')(({ theme }) => ({
   alignSelf: 'center',
   padding: '3px 10px',
   backgroundColor: theme.palette.grey[500],
@@ -53,8 +53,6 @@ export const MessageInfoDay = styled(Paper)(({ theme }) => ({
   fontSize: 14,
   fontWeight: 600,
   margin: '5px 0',
-  position: 'sticky',
-  top: 0,
   zIndex: 10,
 }));
 

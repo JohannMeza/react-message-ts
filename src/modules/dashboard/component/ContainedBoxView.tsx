@@ -1,4 +1,4 @@
-import { Box, styled } from '@mui/material';
+import { Box, ListItemButton, styled } from '@mui/material';
 
 export const ContainedView = styled(Box)<{ moveposition: string }>(
   ({ moveposition }) => ({
@@ -13,7 +13,7 @@ export const ContainedView = styled(Box)<{ moveposition: string }>(
   }),
 );
 
-export const ListSettingBox = styled(Box)(({ theme }) => ({
+export const ListSettingBox = styled(ListItemButton)(({ theme }) => ({
   padding: '16px',
   display: 'flex',
   justifyContent: 'space-between',
