@@ -1,5 +1,5 @@
 import { createAction } from '@cobuildlab/react-simple-state';
-import { responseFriendRequest, responseFriendRequestError, sendMessageContactEvent, sendMessageContactEventError, updateMessageContactEvent, updateMessageContactEventError } from './messaging-events';
+import { responseFriendRequest, responseFriendRequestError, sendMessageContactEvent, sendMessageContactEventError, sendMessageGroupEvent, sendMessageGroupEventError, updateMessageContactEvent, updateMessageContactEventError, updateMessageGroupEvent, updateMessageGroupEventError } from './messaging-events';
 import { axiosService } from '@src/shared/service/axios';
 import { ResponseSuccess } from '@src/shared/types/type';
 import { AxiosResponse } from 'axios';
@@ -64,6 +64,36 @@ export const sendMessageToContact = createAction(
   }
 );
 
+interface SendMessageGroupProps {
+  idTypeMessage: MessageTypesEnum,
+  idGroupMember: number,
+  message: string,
+  description: string
+}
+
+export const sendMessageToGroup = createAction(
+  sendMessageGroupEvent,
+  sendMessageGroupEventError,
+  async(props: SendMessageGroupProps): Promise<ResponseSuccess> => {
+    try {
+      const response = await axiosService<
+        ResponseSuccess,
+        AxiosResponse<ResponseSuccess>
+      >({
+        method: 'POST',
+        url: APP_MESSAGES_PATH.SEND_GROUP,
+        data: props
+      });
+
+      return response.data;
+    } catch (error) {
+      const message = `Error ${error}`;
+      console.error(message);
+      throw error;
+    }
+  }
+);
+
 interface UpdateMessageProps {
   batchMessage: string
   message: string,
@@ -80,6 +110,34 @@ export const updateMessageToContact = createAction(
       >({
         method: 'POST',
         url: APP_MESSAGES_PATH.UPDATE,
+        data: updateMessageProps
+      });
+
+      return response.data;
+    } catch (error) {
+      const message = `Error ${error}`;
+      console.error(message);
+      throw error;
+    }
+  }
+);
+
+interface UpdateMessageGroupProps {
+  batchMessage: string
+  message: string,
+}
+
+export const updateMessageToGroup = createAction(
+  updateMessageGroupEvent,
+  updateMessageGroupEventError,
+  async (updateMessageProps: UpdateMessageGroupProps) => {
+    try {
+      const response = await axiosService<
+        ResponseSuccess,
+        AxiosResponse<ResponseSuccess>
+      >({
+        method: 'POST',
+        url: APP_MESSAGES_PATH.UPDATE_GROUP,
         data: updateMessageProps
       });
 

@@ -15,6 +15,7 @@ export interface AccessAuthProps {
   username: string
   name: string
   pathImage: string
+  info: string
 }
 
 export interface FormRegisterProps {

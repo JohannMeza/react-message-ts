@@ -17,3 +17,13 @@ export interface ContactProps {
   typeContact: MessageStateEnum
   stateContact: ContactStateType
 }
+
+export interface GroupProps {
+  idGroup: number
+  idGroupMember: number
+  name: string
+  pathImage: string
+  info: string
+  typeContact: MessageStateEnum
+  stateContact: ContactStateType
+}

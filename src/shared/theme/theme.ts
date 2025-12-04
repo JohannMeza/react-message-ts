@@ -35,6 +35,7 @@ declare module '@mui/material/styles' {
     background_colors_opacity: {
       [50]: string;
       [60]: string;
+      [600]: string;
     };
   }
 

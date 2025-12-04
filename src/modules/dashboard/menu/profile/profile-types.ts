@@ -6,6 +6,13 @@ export interface ProfileProps {
 
 export interface FormProfileProps {
   name: string
+  image?: string
   info?: string
   idProfile: number
+}
+
+export interface UploadProfileProps {
+  url: string
+  path: string
+  filename: string
 }

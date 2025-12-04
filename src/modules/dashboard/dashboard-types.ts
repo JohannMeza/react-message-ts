@@ -4,8 +4,9 @@ import { MessagesType } from './messaging/messaging-types';
 export enum MessageStateEnum {
   SENT = 1,
   RECEIVED = 2,
-  READ = 3,
+  READED = 3,
   DELETED = 4,
+  UNREAD = 5,
 }
 
 export enum ContactStates {

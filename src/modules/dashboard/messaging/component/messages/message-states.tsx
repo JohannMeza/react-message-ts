@@ -12,6 +12,9 @@ import {
 export const MessageStateIcon = {
   [MessageStateEnum.READED]: <DoneAllIcon fontSize="small" color="info" />,
   [MessageStateEnum.UNREAD]: <CheckIcon fontSize="small" color="action" />,
+  [MessageStateEnum.SENT]: <CheckIcon fontSize="small" color="action" />,
+  [MessageStateEnum.RECEIVED]: <CheckIcon fontSize="small" color="action" />,
+  [MessageStateEnum.DELETED]: <CheckIcon fontSize="small" color="action" />,
 };
 
 export const MessagePopperState = {

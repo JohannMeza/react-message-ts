@@ -1,9 +1,9 @@
 import { Avatar, Box, Menu, MenuItem, Stack, Typography } from '@mui/material';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, PropsWithChildren, useEffect, useRef, useState } from 'react';
 import { useHandleActiveProfileUser } from '../../messaging-hooks';
 import { ProfileUserView } from '../../profile-user/ProfileUserView';
-import { ActionsMessagingEnum, ActiveProfileUserEnum, MessagesType } from '../../messaging-types';
-import { useCallAction, useEvent } from '@cobuildlab/react-simple-state';
+import { ActionsMessagingEnum, ActiveProfileUserEnum } from '../../messaging-types';
+import { useCallAction, useEvent, useFetchAction } from '@cobuildlab/react-simple-state';
 import { ChatView } from '../../component/modals/chat/ChatView';
 import { useHandleChangeModalChatType } from '../../component/modals/chat/chat-hooks';
 import { ModalsChatEnum } from '../../component/modals/chat/chat-types';
@@ -11,7 +11,6 @@ import { fetchMessagingUser } from '@src/modules/dashboard/dashboard-actions';
 import { paddingResponsive } from '../../messaging-styles';
 import { BoxSending, BoxUpdate } from './SectionMessageSend';
 import { sendMessageToContact, updateMessageToContact } from '../../messaging-actions';
-import { ContactProps } from '@src/shared/types/base/contact/contact-types';
 import { MessageTypesEnum } from '@src/shared/types/base/message/message-types';
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -20,12 +19,13 @@ import { messageInitial } from '../../messaging-mockups';
 import { MessageItemView } from '../messages/MessageView';
 import { messageEditEvent } from '../messages/message-events';
 import { MessageInfoDay } from '../messages/message-styles';
+import { contactDataEvent } from '@src/modules/dashboard/dashboard-events';
 
-export const MessagingContact: FC<{ 
-  contactData: ContactProps, 
-  clearData: () => void,
-  messages: MessagesType[]
-}> = ({ contactData, clearData, messages }) => {
+export const MessagingContact: FC<PropsWithChildren> = () => {
+  const contactData = useEvent(contactDataEvent);
+  const [messages] = useFetchAction(fetchMessagingUser, [contactData?.idContactMe]);
+  const clearData = (): void => contactDataEvent.dispatch(null);
+
   const messageEdit = useEvent(messageEditEvent);
   const { currentView, handleChangeActiveProfileUser } = useHandleActiveProfileUser();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -274,9 +274,7 @@ export const MessagingContact: FC<{
             </MessageInfoDay>
             }
             {messageInitial.concat(messages).map((el, index) => (
-              <>
-                <MessageItemView {...el} key={index} />
-              </>
+              <MessageItemView {...el} key={index} />
             ))}
           </Stack>
         </Box>

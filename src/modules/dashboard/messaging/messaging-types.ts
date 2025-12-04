@@ -29,8 +29,10 @@ export enum ActiveProfileUserEnum {
 }
 
 export enum MessagingContainer {
+  NONE = 'NONE',
   UNKNOWN = 'UNKNOWN',
-  CONTACT = 'CONTACT'
+  CONTACT = 'CONTACT',
+  GROUP = 'GROUP',
 }
 
 export interface MessagesType {
@@ -49,6 +51,10 @@ export interface MessagesType {
   url: string;
   fileName: string;
   typeFile: DocumentType;
+}
+
+export interface MessagingContainerProps {
+  typeMessagingContainer: MessagingContainer
 }
 
 export interface MessagingType {

@@ -1,8 +1,10 @@
 import { MessageStateEnum } from '@src/modules/dashboard/dashboard-types';
+import { MessagingContainer } from '@src/modules/dashboard/messaging/messaging-types';
 
 export interface ChatItemType {
   message: string;
   messagesUnread: string
+  contactStatus: MessagingContainer
   name: string;
   avatar: string | undefined;
   handleClickChat?: (id: string) => void;

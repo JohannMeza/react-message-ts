@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { Avatar, Box, Stack, Typography } from '@mui/material';
 import { useCallAction } from '@cobuildlab/react-simple-state';
-import { fetchContactData } from '../../../dashboard-actions';
+import { fetchContactData, fetchGroupData } from '../../../dashboard-actions';
 import { getPastDateString } from '@src/modules/dashboard/dashboard-functions';
 import { MessageStateEnum } from '../../../dashboard-types';
 import { ChatItemType } from '../contact/contact-types';
@@ -10,6 +10,12 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { ComunicationTypesEnum } from '@src/shared/types/base/message/message-types';
 import { updateStateMessages } from '../contact/contact-actions';
 import { styled } from '@mui/material/styles';
+import { messagingContainerActiveEvent } from '@src/modules/dashboard/messaging/messaging-events';
+import useAuthContext from '@src/shared/hook/useAuthContext';
+import { snackbar } from '@src/shared/component/ui/snackbar/Snackbar';
+import { messageEditEvent } from '@src/modules/dashboard/messaging/component/messages/message-events';
+import { contactDataEvent, groupDataEvent } from '@src/modules/dashboard/dashboard-events';
+import { ContactStateType } from '@src/shared/types/base/contact/contact-types';
 
 const BoxLengthUnread = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -28,6 +34,7 @@ const BoxLengthUnread = styled(Box)(({ theme }) => ({
 export const ChatItemView: FC<ChatItemType> = ({
   message,
   messagesUnread,
+  contactStatus,
   name,
   avatar,
   idContact,
@@ -35,6 +42,7 @@ export const ChatItemView: FC<ChatItemType> = ({
   idContactMessageState,
   sendDateTime,
 }) => {
+  const { user } = useAuthContext();
   const [isRead, setIsRead] = useState<boolean>(false);
   const [callState] = useCallAction(updateStateMessages);
   const [callContact] = useCallAction(fetchContactData, {
@@ -43,14 +51,33 @@ export const ChatItemView: FC<ChatItemType> = ({
         idTypeComunication === ComunicationTypesEnum.RECEIVER) {
         callState(resp.idContactMe, resp.idContactYour);
       }
+    },
+    onError(err) {
+      snackbar.any({
+        message: err.text,
+        title: err.title,
+        type: err.type,
+      });
+    }
+  });
+
+  const [callGroup] = useCallAction(fetchGroupData, {
+    onCompleted() {},
+    onError() {
+      // snackbar.any({
+      //   message: err.text,
+      //   title: err.title,
+      //   type: err.type,
+      // });
     }
   });
 
   const MessageStateIcon = {
     [MessageStateEnum.SENT]: <DoneAllIcon fontSize="small" color="info" />,
     [MessageStateEnum.RECEIVED]: <CheckIcon fontSize="small" color="action" />,
-    [MessageStateEnum.READ]: <DoneAllIcon fontSize="small" color="info" />,
+    [MessageStateEnum.READED]: <DoneAllIcon fontSize="small" color="info" />,
     [MessageStateEnum.DELETED]: <CheckIcon fontSize="small" color="action" />,
+    [MessageStateEnum.UNREAD]: <CheckIcon fontSize="small" color="action" />,
   };
 
   const colorMessageUnread = (Boolean(messagesUnread) && !isRead &&
@@ -63,8 +90,34 @@ export const ChatItemView: FC<ChatItemType> = ({
         cursor: 'pointer',
       }}
       onClick={() => {
+        messagingContainerActiveEvent.dispatch({ typeMessagingContainer: contactStatus });
+        messageEditEvent.dispatch(null);
+        contactDataEvent.dispatch({
+          idContactMe: 0,
+          idContactYour: 0,
+          idUserContact: 0,
+          name: '',
+          pathImage: '',
+          info: '',
+          typeContact: MessageStateEnum.SENT,
+          stateContact: ContactStateType.CONTACT
+        });
+        groupDataEvent.dispatch({
+          idGroup: 0,
+          idGroupMember: 0,
+          name: '',
+          pathImage: '',
+          info: '',
+          typeContact: MessageStateEnum.SENT,
+          stateContact: ContactStateType.CONTACT
+        });
+
         setIsRead(true);
-        callContact(idContact);
+        if (contactStatus === 'CONTACT') {
+          callContact(idContact);
+        } else if (contactStatus === 'GROUP') {
+          callGroup(idContact, user.idUser);
+        }
       }}
       flexDirection="row"
       paddingX={2}

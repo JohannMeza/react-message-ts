@@ -17,7 +17,7 @@ export const DocumentView: FC<PropsWithChildren> = () => (
         </Typography>
         <Box display="grid" gridTemplateColumns="1fr" gap={2}>
           {item.messages.map((message) => (
-            <MessageItemView {...message} key={message.id} />
+            <MessageItemView {...message} key={message.idContactMessage} />
           ))}
         </Box>
       </Box>

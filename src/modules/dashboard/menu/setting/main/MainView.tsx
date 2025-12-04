@@ -15,7 +15,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 export const MainView = <T extends SettingMainView>(
   props: T,
 ): React.ReactElement => {
-  const { logout } = useAuthContext();
+  const { logout, user } = useAuthContext();
   const { handleChangeMenu } = useHandleChangeMenuView();
   const { handleChangeSetting, handleChangeProps } = useHandleChangeSettingView();
   const { data } = props;
@@ -46,12 +46,12 @@ export const MainView = <T extends SettingMainView>(
           handleChangeSetting(SettingCurrentViewEnum.PROFILE, false);
         }}
       >
-        <Avatar sx={{ width: 80, height: 80 }} />
+        <Avatar sx={{ width: 80, height: 80 }} src={user.pathImage} />
         <Stack>
           <Typography fontSize={18} fontWeight={500}>
-            Esther Howard
+            {user.name}
           </Typography>
-          <Typography fontSize={16}>Hola esoy usando whatsapp</Typography>
+          <Typography fontSize={16}>{user.info}</Typography>
         </Stack>
       </Stack>
       <Stack marginTop={2}>

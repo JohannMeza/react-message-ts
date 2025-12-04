@@ -73,7 +73,7 @@ export const ChatView: FC<PropsWithChildren> = () => {
         paddingBottom={1}
       >
         <Stack flexDirection="row" alignItems="center" gap={2}>
-          <Avatar />
+          <Avatar src={user.pathImage} />
           <Typography fontSize={20} fontWeight={800} color="grey.700">
             { user.name }
           </Typography>

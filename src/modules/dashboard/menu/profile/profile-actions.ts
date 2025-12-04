@@ -1,7 +1,7 @@
 import { createAction } from '@cobuildlab/react-simple-state';
-import { profileEvent, profileEventError, profileUpdateEvent, profileUpdateEventError } from './profile-events';
+import { profileEvent, profileEventError, profileImageEvent, profileImageEventError, profileUpdateEvent, profileUpdateEventError } from './profile-events';
 import { Response, ResponseSuccess } from '@src/shared/types/type';
-import { FormProfileProps, ProfileProps } from './profile-types';
+import { FormProfileProps, ProfileProps, UploadProfileProps } from './profile-types';
 import { axiosService } from '@src/shared/service/axios';
 import { AxiosResponse } from 'axios';
 import { APP_PROFILE_PATH } from '@src/shared/constant/paths';
@@ -18,6 +18,36 @@ export const fetchProfileMe = createAction(
         method: 'GET',
         url: `${APP_PROFILE_PATH.ME}/${idUser}`,
       });
+      return resp.data.dataObject;
+    } catch (error) {
+      const message = `Error ${error}`;
+      console.error(message);
+      throw error;
+    }
+  }
+);
+
+export const uploadImage = createAction(
+  profileImageEvent,
+  profileImageEventError,
+  async (file: File, idUser: number): Promise<UploadProfileProps> => {
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      const resp = await axiosService<
+        Response<{ dataObject: UploadProfileProps }>,
+        AxiosResponse<Response<{ dataObject: UploadProfileProps }>>
+      >({
+        method: 'POST',
+        url: `${APP_PROFILE_PATH.UPLOAD}/${idUser}`,
+        data: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'File-Type': 'image',
+        },
+      });
+
       return resp.data.dataObject;
     } catch (error) {
       const message = `Error ${error}`;

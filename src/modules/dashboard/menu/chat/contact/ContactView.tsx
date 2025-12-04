@@ -8,6 +8,7 @@ import useAuthContext from '@src/shared/hook/useAuthContext';
 import { LoaderAwait } from '@src/shared/component/ui/loader/Loader';
 import { useFormSearchContact, useHandleSearchContact } from './contact-hooks';
 import { Controller } from 'react-hook-form';
+import { MessagingContainer } from '@src/modules/dashboard/messaging/messaging-types';
 
 export const ContactView: FC<PropsWithChildren> = () => {
   const { user } = useAuthContext();
@@ -39,6 +40,7 @@ export const ContactView: FC<PropsWithChildren> = () => {
             <ChatItemView
               key={index}
               avatar={el.pathImagen}
+              contactStatus={MessagingContainer.CONTACT}
               messagesUnread={el.messagesUnread}
               message={el.lastMessage}
               idTypeComunication={el.idTypeComunication}

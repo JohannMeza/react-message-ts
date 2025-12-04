@@ -9,16 +9,24 @@ import {
   Button,
 } from '@mui/material';
 import { Controls } from '@src/shared/component/Controls';
-import { contactsMockup, contactsSelectMockup } from './member-mockups';
 import { GroupCurrentViewEnum } from '../group-types';
 import { useHandleChangeGroupView } from '../group-hooks';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import { useHandleChangeMenuView } from '../../menu-hooks';
 import { MenuCurrentViewEnum } from '../../menu-types';
+import { useEvent, useFetchAction } from '@cobuildlab/react-simple-state';
+import { ListContactsAddedGroupAction } from './member-actions';
+import useAuthContext from '@src/shared/hook/useAuthContext';
+import { memberContactSelectEvent } from './member-events';
 
 export const MemberView: FC<PropsWithChildren> = () => {
+  const { user } = useAuthContext();
   const { handleChangeMenu } = useHandleChangeMenuView();
   const { handleChangeGroup } = useHandleChangeGroupView();
+  const contactsSelect = useEvent(memberContactSelectEvent);
+  const [data] = useFetchAction(ListContactsAddedGroupAction, [user.idUser], {
+    onCompleted() {}
+  });
 
   return (
     <Box
@@ -47,12 +55,15 @@ export const MemberView: FC<PropsWithChildren> = () => {
         maxHeight={120}
         overflow="auto"
       >
-        {contactsSelectMockup.map((el, index) => (
+        {contactsSelect?.map((el, index) => (
           <Chip
             key={index}
-            avatar={<Avatar alt={el.name} src={el.avatar} />}
+            avatar={<Avatar alt={el.name} src={el.pathImage} />}
             label={el.name}
-            onDelete={() => {}}
+            onDelete={() => {
+              const dataFilter = contactsSelect.filter((it) => it.idUser !== el.idUser);
+              memberContactSelectEvent.dispatch(dataFilter);
+            }}
           />
         ))}
       </Stack>
@@ -62,7 +73,7 @@ export const MemberView: FC<PropsWithChildren> = () => {
           placeholder="Buscar Contactos..."
         />
         <Stack overflow="auto">
-          {contactsMockup.map((el, index) => (
+          {data?.map((el, index) => (
             <Stack
               sx={{
                 '&:hover': { backgroundColor: 'tertiary.main' },
@@ -74,8 +85,21 @@ export const MemberView: FC<PropsWithChildren> = () => {
               paddingY={1}
               gap={2}
               key={index}
+              onClick={() => {
+                const find = contactsSelect.find((it) => it.idUser === el.idUser);
+                if (!find) {
+                  memberContactSelectEvent.dispatch([
+                    ...contactsSelect,
+                    {
+                      idUser: el.idUser,
+                      name: el.name,
+                      pathImage: el.pathImage
+                    }
+                  ]);
+                }
+              }}
             >
-              <Avatar src={el.avatar ?? ''} />
+              <Avatar src={el.pathImage ?? ''} />
               <Stack gap={0.3} width={1}>
                 <Stack
                   flexDirection="row"
@@ -87,7 +111,7 @@ export const MemberView: FC<PropsWithChildren> = () => {
                     {el.name}
                   </Typography>
                 </Stack>
-                <Typography fontSize={15}>{el.description}</Typography>
+                <Typography fontSize={15}>{el.info}</Typography>
               </Stack>
             </Stack>
           ))}

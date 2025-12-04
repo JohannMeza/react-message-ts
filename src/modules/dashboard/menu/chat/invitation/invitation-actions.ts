@@ -47,7 +47,6 @@ export const rejectInvitationAction = createAction(
           idUser
         }
       });
-      console.log(resp.data);
       return resp.data;
     } catch (error) {
       const message = `Error ${error}`;

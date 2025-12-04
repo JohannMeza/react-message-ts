@@ -13,7 +13,7 @@ export const groupsMockup: GroupItemType[] = [
   {
     name: 'Familia',
     message: 'lorem ipsum',
-    state: MessageStateEnum.UNREAD,
+    state: MessageStateEnum.READED,
     avatar: null,
     createdAt: 1696688883349,
     id: '1696698883341',

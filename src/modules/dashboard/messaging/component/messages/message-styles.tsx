@@ -1,11 +1,11 @@
 import { Box, Paper, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-export const MessageNormal = styled(Paper)<{ isendme: string }>(
-  ({ isendme }) => ({
+export const MessageNormal = styled(Paper)<{ isendme: string, name: string }>(
+  ({ isendme, name }) => ({
     maxWidth: 350,
     minWidth: 'auto',
-    padding: '0.5rem 1rem',
+    padding: name !== '' ? '0.9rem 1rem 0.5rem 0.5rem' : '0.5rem 1rem 0.5rem',
     position: 'relative',
     alignSelf: isendme ? 'flex-end' : 'flex-start',
     '&:hover > div': {

@@ -38,7 +38,7 @@ export const MainView = <T extends ItemPrivacyMain>(
         {
           propsSetting.props.data?.map((el) => (
             <Box>
-              <ItemSettingBox { ...el as unknown as ItemSettingOptionProp } />
+              <ItemSettingBox idConfigurationUser={0} value={''} {...el as unknown as ItemSettingOptionProp} />
               {
                 el.children.map((item, index) => (
                   <ItemSettingBox key={index} handleClick={() => {

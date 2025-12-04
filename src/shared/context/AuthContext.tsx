@@ -14,7 +14,8 @@ export const AuthContext = createContext<AuthContextProps>({
     email: '',
     idUser: 0,
     name: '',
-    pathImage: ''
+    pathImage: '',
+    info: '',
   },
   isAuth: false,
 });
@@ -42,7 +43,7 @@ export const AuthContextProvider: FC<PropsWithChildren> = ({
       logout();
     }
   });
-    
+  
   const value = useMemo(() => ({
     access: (() => callAccess)(),
     logout: (() => logout)(),
@@ -50,6 +51,7 @@ export const AuthContextProvider: FC<PropsWithChildren> = ({
     user: {
       idUser: user?.dataObject.idUser,
       username: user?.dataObject.username,
+      info: user?.dataObject.info,
       email: user?.dataObject.email,
       name: user?.dataObject.name,
       pathImage: user?.dataObject.pathImage,

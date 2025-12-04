@@ -45,7 +45,7 @@ export const MessagePopper: FC<{
 
   const handleMessageEdit = (e: Event | React.SyntheticEvent): void => {
     messageEditEvent.dispatch({ 
-      idContactMessage,
+      idMessage: idContactMessage,
       message: messageEdit,
       batchMessage
     });

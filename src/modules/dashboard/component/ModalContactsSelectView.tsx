@@ -5,7 +5,6 @@ import {
   DialogContent,
   List,
   ListItemAvatar,
-  ListItemButton,
   ListItemText,
   Stack,
   Typography,
@@ -48,7 +47,6 @@ export const ModalContactsLockedView: FC<ModalContactsType> = ({
         {contacts.map((contact, index) => (
           <ListSettingBox
             sx={{ '&:hover': { backgroundColor: 'grey.100' } }}
-            component={ListItemButton}
             key={index}
           >
             <ListItemAvatar>

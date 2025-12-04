@@ -9,14 +9,21 @@ export const axiosConfig = axios.create({
 });
 
 axiosConfig.interceptors.request.use((config) => {
+  const bearer = sessionStorage.getItem(APP_TOKEN_AUTH);
+  config.headers.Authorization = bearer;
+
+  if (config.headers['File-Type'] === 'image') {
+    return config;
+  }
+
   const timestamp = Date.now();
   const parse = { ...config.data, timestamp };
   const stringify = JSON.stringify(parse);
   const secret = encryptStringAES(stringify, APP_CRYPTO_KEY);
-  const bearer = sessionStorage.getItem(APP_TOKEN_AUTH);
-  config.headers.Authorization = bearer;
+
   config.headers['Content-Type'] = 'text/plain';
   config.data = secret;
+
   return config;
 });
 

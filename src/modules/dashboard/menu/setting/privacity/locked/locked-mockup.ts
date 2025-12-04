@@ -1,4 +1,5 @@
-import { ContactsType } from './locked-types';
+import { MessageStateEnum } from '@src/modules/dashboard/dashboard-types';
+import { ContactsViewLockedProps } from './locked-types';
 
 export const contactsBloquedMockup = [
   {
@@ -27,45 +28,93 @@ export const contactsBloquedMockup = [
   },
 ];
 
-export const contactsMockup: ContactsType[] = [
+export const contactsMockup: ContactsViewLockedProps[] = [
   {
     name: 'Esther Howard',
     description: 'La vida solo es una',
-    avatar: null,
+    messagesUnread: '',
+    pathImagen: undefined,
+    idUser: 0,
+    idContact: 0,
+    idTypeComunication: 0,
+    idContactMessageState: MessageStateEnum.SENT,
+    dSendDateTime: ''
   },
   {
     name: 'Esther Howard',
     description: 'No hay vuelta atras',
-    avatar: null,
+    messagesUnread: '',
+    pathImagen: undefined,
+    idUser: 0,
+    idContact: 0,
+    idTypeComunication: 0,
+    idContactMessageState: MessageStateEnum.SENT,
+    dSendDateTime: ''
   },
   {
     name: 'Esther Howard',
     description: 'La vida solo es una',
-    avatar: null,
+    messagesUnread: '',
+    pathImagen: undefined,
+    idUser: 0,
+    idContact: 0,
+    idTypeComunication: 0,
+    idContactMessageState: MessageStateEnum.SENT,
+    dSendDateTime: ''
   },
   {
     name: 'Esther Howard',
     description: 'No hay vuelta atras',
-    avatar: null,
+    messagesUnread: '',
+    pathImagen: undefined,
+    idUser: 0,
+    idContact: 0,
+    idTypeComunication: 0,
+    idContactMessageState: MessageStateEnum.SENT,
+    dSendDateTime: ''
   },
   {
     name: 'Esther Howard',
     description: 'La vida solo es una',
-    avatar: null,
+    messagesUnread: '',
+    pathImagen: undefined,
+    idUser: 0,
+    idContact: 0,
+    idTypeComunication: 0,
+    idContactMessageState: MessageStateEnum.SENT,
+    dSendDateTime: ''
   },
   {
     name: 'Esther Howard',
     description: 'No hay vuelta atras',
-    avatar: null,
+    messagesUnread: '',
+    pathImagen: undefined,
+    idUser: 0,
+    idContact: 0,
+    idTypeComunication: 0,
+    idContactMessageState: MessageStateEnum.SENT,
+    dSendDateTime: ''
   },
   {
     name: 'Esther Howard',
     description: 'La vida solo es una',
-    avatar: null,
+    messagesUnread: '',
+    pathImagen: undefined,
+    idUser: 0,
+    idContact: 0,
+    idTypeComunication: 0,
+    idContactMessageState: MessageStateEnum.SENT,
+    dSendDateTime: ''
   },
   {
     name: 'Esther Howard',
     description: 'No hay vuelta atras',
-    avatar: null,
+    messagesUnread: '',
+    pathImagen: undefined,
+    idUser: 0,
+    idContact: 0,
+    idTypeComunication: 0,
+    idContactMessageState: MessageStateEnum.SENT,
+    dSendDateTime: ''
   },
 ];

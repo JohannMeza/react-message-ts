@@ -1,6 +1,6 @@
-import { FC, PropsWithChildren, useState } from 'react';
+import { useState } from 'react';
 import { Stack, IconButton, Typography, Box, Avatar } from '@mui/material';
-import { PrivacityCurrentViewEnum } from '../privacity-types';
+import { ItemPrivacyLocked, PrivacityCurrentViewEnum } from '../privacity-types';
 import { useHandleChangePrivacityView } from '../privacity-hooks';
 import { ModalContactsLockedView } from '@src/modules/dashboard/component/ModalContactsLockedView';
 import { ListSettingBox } from '@src/modules/dashboard/component/ContainedBoxView';
@@ -14,7 +14,10 @@ import useAuthContext from '@src/shared/hook/useAuthContext';
 import { ContactStates } from '@src/modules/dashboard/dashboard-types';
 import { ContactsViewLockedProps } from './locked-types';
 
-export const LockedView: FC<PropsWithChildren> = () => {
+export const LockedView = <T extends ItemPrivacyLocked>(
+  props: T
+): React.ReactElement => {
+  console.log(props);
   const { user } = useAuthContext();
   const { handleChangePrivacity } = useHandleChangePrivacityView();
   const [open, setOpen] = useState(false);

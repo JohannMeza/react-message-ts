@@ -30,7 +30,9 @@ import { ComunicationTypesEnum } from '@src/shared/types/base/message/message-ty
 
 export const MessageNormalBox = <T extends MessageNormalBoxType>(
   props: T,
-): React.ReactElement => (
+): React.ReactElement => {
+  console.log(props);
+  return (
   <>
     {props.isNewDay && (
       <MessageInfoDay 
@@ -38,7 +40,10 @@ export const MessageNormalBox = <T extends MessageNormalBoxType>(
       >{getPastDateString(props.sendDateTime)}
       </MessageInfoDay>
     )}
-    <MessageNormal isendme={props.idTypeComunication === ComunicationTypesEnum.TRANSMITER ? 'true' : ''}>
+    <MessageNormal isendme={props.idTypeComunication === ComunicationTypesEnum.TRANSMITER ? 'true' : ''} name={props.name} >
+      <Typography color='blue.main' fontWeight={900} position='absolute' top={2} fontSize={12}>
+        {props.name}<br />
+      </Typography>
       {props.message}
 
       <MessagePopper 
@@ -69,6 +74,7 @@ export const MessageNormalBox = <T extends MessageNormalBoxType>(
     </MessageNormal>
   </>
 );
+};
 
 export const MessageInfoBox = <T extends MessageInfoBoxType>(
   props: T,

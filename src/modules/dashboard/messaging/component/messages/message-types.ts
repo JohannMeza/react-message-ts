@@ -33,6 +33,7 @@ export interface MessageComponentProps {
 
 export interface MessageNormalBoxType {
   idContactMessage: number;
+  name: string
   typeMessage: MessagesTypesEnum;
   message: string;
   batchMessage: string;

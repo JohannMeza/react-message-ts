@@ -67,7 +67,6 @@ export const fetchAccessAuth = createAction(
         method: 'POST',
         url: APP_AUTH_PATH.ACCESS,
       });
-      
       return resp.data;
     } catch (error) {
       const message = `Error ${error}`;

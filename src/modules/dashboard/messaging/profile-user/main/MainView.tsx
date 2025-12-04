@@ -2,13 +2,13 @@ import { FC, PropsWithChildren } from 'react';
 import {
   Avatar,
   Box,
-  Grid,
   IconButton,
   Stack,
   Typography,
   useTheme,
   Switch,
 } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import { useHandleActiveProfileUser } from '../../messaging-hooks';
 import { chatsMockup } from './main-mockup';
 import {
@@ -27,12 +27,17 @@ import { ProfileUserCurrentView } from '../profile-user-types';
 import { ListSettingBox } from '@src/modules/dashboard/component/ContainedBoxView';
 import { useHandleChangeModalChatType } from '../../component/modals/chat/chat-hooks';
 import { ModalsChatEnum } from '../../component/modals/chat/chat-types';
+import { useEvent } from '@cobuildlab/react-simple-state';
+import { contactDataEvent, groupDataEvent } from '@src/modules/dashboard/dashboard-events';
 
 export const MainView: FC<PropsWithChildren> = () => {
   const { handleChangeActiveProfileUser } = useHandleActiveProfileUser();
   const { handleChangeProfileUser } = useHandleChangeProfileUserView();
   const { handleChangeModalChat } = useHandleChangeModalChatType();
 
+  const contactData = useEvent(contactDataEvent);
+  const groupData = useEvent(groupDataEvent);
+  console.log(contactData, groupData);
   const theme = useTheme();
 
   const handleActionsProfile = (action: ActionsMessagingEnum): void => {
@@ -77,9 +82,11 @@ export const MainView: FC<PropsWithChildren> = () => {
       <Stack width={1} height={1} overflow="auto" gap={2}>
         <Stack paddingX={3} width={1} gap={2}>
           <Stack alignItems="center" width={1}>
-            <Avatar sx={{ width: 150, height: 150 }} />
+            <Avatar sx={{ width: 150, height: 150 }} src={contactData.pathImage || groupData.pathImage} />
             <Typography fontSize={20} fontWeight={700}>
-              Esther Howard
+              {
+                contactData.name || groupData.name
+              }
             </Typography>
           </Stack>
 
@@ -87,7 +94,7 @@ export const MainView: FC<PropsWithChildren> = () => {
             <Typography fontSize={16} fontWeight={500}>
               Información
             </Typography>
-            <Typography fontSize={14}>La vida solo es una</Typography>
+            <Typography fontSize={14}>{ contactData.info || groupData.info }</Typography>
           </Box>
 
           <Box sx={{ textWrap: 'nowrap' }}>
@@ -102,7 +109,7 @@ export const MainView: FC<PropsWithChildren> = () => {
               Archivos, enlaces y documentos
             </Typography>
             <Grid container spacing={1}>
-              <Grid item xs={4}>
+              <Grid size={4}>
                 <Box
                   bgcolor="primary.main"
                   height="80px"
@@ -126,7 +133,7 @@ export const MainView: FC<PropsWithChildren> = () => {
                   />
                 </Box>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={4}>
                 <Box
                   bgcolor="primary.main"
                   height="80px"
@@ -150,7 +157,7 @@ export const MainView: FC<PropsWithChildren> = () => {
                   />
                 </Box>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={4}>
                 <Box
                   bgcolor="primary.main"
                   height="80px"

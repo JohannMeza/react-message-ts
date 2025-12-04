@@ -1,7 +1,7 @@
 import { createEvent } from '@cobuildlab/react-simple-state';
 
 interface MessageEditProps {
-  idContactMessage: number
+  idMessage: number
   batchMessage: string
   message: string
 }

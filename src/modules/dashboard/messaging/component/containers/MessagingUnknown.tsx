@@ -1,12 +1,12 @@
 import { Avatar, Box, Button, Menu, MenuItem, Stack, Typography } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC, PropsWithChildren, useState } from 'react';
 import { messageInitial } from '../../messaging-mockups';
 import { MessageItemView } from '../../component/messages/MessageView';
 import { useHandleActiveProfileUser } from '../../messaging-hooks';
 import { ProfileUserView } from '../../profile-user/ProfileUserView';
 import { ActionsMessagingEnum, ActiveProfileUserEnum } from '../../messaging-types';
 import { paddingResponsive } from '../../messaging-styles';
-import { useCallAction } from '@cobuildlab/react-simple-state';
+import { useCallAction, useEvent } from '@cobuildlab/react-simple-state';
 import { ChatView } from '../../component/modals/chat/ChatView';
 import { useHandleChangeModalChatType } from '../../component/modals/chat/chat-hooks';
 import { ModalsChatEnum } from '../../component/modals/chat/chat-types';
@@ -17,9 +17,11 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import useAuthContext from '@src/shared/hook/useAuthContext';
 import { snackbar } from '@src/shared/component/ui/snackbar/Snackbar';
-import { ContactProps } from '@src/shared/types/base/contact/contact-types';
+import { contactDataEvent } from '@src/modules/dashboard/dashboard-events';
 
-export const MessagingUnknown: FC<{ contactData: ContactProps, clearData: () => void }> = ({ contactData, clearData }) => {
+export const MessagingUnknown: FC<PropsWithChildren> = () => {
+  const contactData = useEvent(contactDataEvent);
+  const clearData = (): void => contactDataEvent.dispatch(null);
   const { currentView, handleChangeActiveProfileUser } =
     useHandleActiveProfileUser();
   const { handleChangeModalChat } = useHandleChangeModalChatType();

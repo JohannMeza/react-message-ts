@@ -50,7 +50,6 @@ export const ModalContactsLockedView: FC<ModalContactsType> = ({
       }
     });
   };
-  console.log(contacts);
   return (
     <Controls.ModalComponent
       open={open}

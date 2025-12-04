@@ -4,7 +4,7 @@ import { configTheme } from '@src/shared/theme/theme';
 import '@src/shared/styles/main.css';
 import { SnackbarProvider } from './shared/component/ui/snackbar/Snackbar';
 import { AuthContextProvider } from './shared/context/AuthContext';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 
 const App = (): React.ReactNode => (
   <ThemeProvider theme={configTheme(configTheme())}>
