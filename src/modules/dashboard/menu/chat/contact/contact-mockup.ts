@@ -1,5 +1,6 @@
 import { MessageStateEnum } from '@src/modules/dashboard/dashboard-types';
 import { ChatItemType } from './contact-types';
+import { MessagingContainer } from '@src/modules/dashboard/messaging/messaging-types';
 
 export const contactsMockup: ChatItemType[] = [
   {
@@ -10,7 +11,8 @@ export const contactsMockup: ChatItemType[] = [
     idContact: 0,
     idTypeComunication: 0,
     idContactMessageState: MessageStateEnum.SENT,
-    sendDateTime: ''
+    sendDateTime: '',
+    contactStatus: MessagingContainer.NONE
   },
   {
     name: 'Esther Howard',
@@ -20,7 +22,8 @@ export const contactsMockup: ChatItemType[] = [
     idContact: 0,
     idTypeComunication: 0,
     idContactMessageState: MessageStateEnum.SENT,
-    sendDateTime: ''
+    sendDateTime: '',
+    contactStatus: MessagingContainer.NONE
   },
   {
     name: 'Esther Howard',
@@ -30,7 +33,8 @@ export const contactsMockup: ChatItemType[] = [
     idContact: 0,
     idTypeComunication: 0,
     idContactMessageState: MessageStateEnum.SENT,
-    sendDateTime: ''
+    sendDateTime: '',
+    contactStatus: MessagingContainer.NONE
   },
   {
     name: 'Esther Howard',
@@ -40,7 +44,8 @@ export const contactsMockup: ChatItemType[] = [
     idContact: 0,
     idTypeComunication: 0,
     idContactMessageState: MessageStateEnum.SENT,
-    sendDateTime: ''
+    sendDateTime: '',
+    contactStatus: MessagingContainer.NONE
   },
   {
     name: 'David Cerron',
@@ -50,7 +55,8 @@ export const contactsMockup: ChatItemType[] = [
     idContact: 0,
     idTypeComunication: 0,
     idContactMessageState: MessageStateEnum.SENT,
-    sendDateTime: ''
+    sendDateTime: '',
+    contactStatus: MessagingContainer.NONE
   },
   {
     name: 'Nicole Perez',
@@ -60,7 +66,8 @@ export const contactsMockup: ChatItemType[] = [
     idContact: 0,
     idTypeComunication: 0,
     idContactMessageState: MessageStateEnum.SENT,
-    sendDateTime: ''
+    sendDateTime: '',
+    contactStatus: MessagingContainer.NONE
   },
   {
     name: 'Hellen Fernadez',
@@ -70,6 +77,7 @@ export const contactsMockup: ChatItemType[] = [
     idContact: 0,
     idTypeComunication: 0,
     idContactMessageState: MessageStateEnum.SENT,
-    sendDateTime: ''
+    sendDateTime: '',
+    contactStatus: MessagingContainer.NONE
   },
 ];
