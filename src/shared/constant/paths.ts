@@ -10,6 +10,10 @@ export const APP_PROFILE_PATH = {
   UPLOAD: '/profile/upload'
 };
 
+export const APP_PROFILE_USER_PATH = {
+  PROFILE: '/profile-user/find',
+};
+
 export const APP_USER_PATH = {
   ALL: '/users/all',
   FIND_ONE: '/users/find'
@@ -36,6 +40,7 @@ export const APP_GROUP_PATH = {
   FIND_ONE: '/groups/find',
   CREATE: '/groups/new',
   UPLOAD: '/groups/upload',
+  PROFILE: '/groups/profile',
 };
 
 export const APP_SETTING_PATH = {

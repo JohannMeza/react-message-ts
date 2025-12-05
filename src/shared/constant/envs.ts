@@ -1,5 +1,5 @@
-// export const APP_URL_SERVER = 'http://119.8.155.191:3000';
-export const APP_URL_SERVER = 'http://localhost:3000';
+export const APP_URL_SERVER = 'http://119.8.155.191:3000';
+// export const APP_URL_SERVER = 'http://localhost:3000';
 export const APP_TOKEN_AUTH = 'AUTH';
 
 export const APP_URL_GETDATA = '/api/ReadUtil/GetData';

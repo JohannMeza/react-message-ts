@@ -30,9 +30,7 @@ import { ComunicationTypesEnum } from '@src/shared/types/base/message/message-ty
 
 export const MessageNormalBox = <T extends MessageNormalBoxType>(
   props: T,
-): React.ReactElement => {
-  console.log(props);
-  return (
+): React.ReactElement => (
   <>
     {props.isNewDay && (
       <MessageInfoDay 
@@ -74,7 +72,6 @@ export const MessageNormalBox = <T extends MessageNormalBoxType>(
     </MessageNormal>
   </>
 );
-};
 
 export const MessageInfoBox = <T extends MessageInfoBoxType>(
   props: T,
